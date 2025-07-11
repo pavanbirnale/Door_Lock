@@ -1,0 +1,1895 @@
+
+
+Microchip MPLAB XC8 Assembler V2.50 build 20240725155939 
+                                                                                               Fri Jul 11 17:57:32 2025
+
+Microchip MPLAB XC8 C Compiler v2.50 (Free license) build 20240725155939 Og1 
+     1                           	processor	18F4550
+     2                           	fnconf	rparam,??,?,0
+     3                           	pagewidth 120
+     4                           	opt	flic
+     5                           	psect	idataCOMRAM,global,class=CODE,space=0,delta=1,noexec
+     6                           	psect	smallconst,global,reloc=2,class=SMALLCONST,space=0,delta=1,noexec
+     7                           	psect	cinit,global,reloc=2,class=CODE,space=0,delta=1
+     8                           	psect	bssCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     9                           	psect	dataCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+    10                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+    11                           	psect	text0,global,reloc=2,class=CODE,space=0,delta=1
+    12                           	psect	text1,global,reloc=2,class=CODE,space=0,delta=1
+    13                           	psect	text2,global,reloc=2,class=CODE,space=0,delta=1
+    14                           	psect	text3,global,reloc=2,class=CODE,space=0,delta=1
+    15                           	psect	text4,global,reloc=2,class=CODE,space=0,delta=1
+    16                           	psect	text5,global,reloc=2,class=CODE,space=0,delta=1
+    17                           	psect	text6,global,reloc=2,class=CODE,space=0,delta=1
+    18                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    19                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    20   000000                     
+    21                           ; Generated 17/10/2023 GMT
+    22                           ; 
+    23                           ; Copyright © 2023, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    24                           ; All rights reserved.
+    25                           ; 
+    26                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    27                           ; 
+    28                           ; Redistribution and use in source and binary forms, with or without modification, are
+    29                           ; permitted provided that the following conditions are met:
+    30                           ; 
+    31                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    32                           ;        conditions and the following disclaimer.
+    33                           ; 
+    34                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    35                           ;        of conditions and the following disclaimer in the documentation and/or other
+    36                           ;        materials provided with the distribution. Publication is not required when
+    37                           ;        this file is used in an embedded application.
+    38                           ; 
+    39                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    40                           ;        software without specific prior written permission.
+    41                           ; 
+    42                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    43                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    44                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    45                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    46                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    47                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    48                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    49                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    50                           ; 
+    51                           ; 
+    52                           ; Code-generator required, PIC18F4550 Definitions
+    53                           ; 
+    54                           ; SFR Addresses
+    55   000FE0                     bsr             equ	4064
+    56   000FE9                     fsr0            equ	4073
+    57   000FEA                     fsr0h           equ	4074
+    58   000FE9                     fsr0l           equ	4073
+    59   000FE1                     fsr1            equ	4065
+    60   000FE2                     fsr1h           equ	4066
+    61   000FE1                     fsr1l           equ	4065
+    62   000FD9                     fsr2            equ	4057
+    63   000FDA                     fsr2h           equ	4058
+    64   000FD9                     fsr2l           equ	4057
+    65   000FEF                     indf0           equ	4079
+    66   000FE7                     indf1           equ	4071
+    67   000FDF                     indf2           equ	4063
+    68   000FF2                     intcon          equ	4082
+    69   000000                     nvmcon          equ	0
+    70   000FF9                     pcl             equ	4089
+    71   000FFA                     pclath          equ	4090
+    72   000FFB                     pclatu          equ	4091
+    73   000FEB                     plusw0          equ	4075
+    74   000FE3                     plusw1          equ	4067
+    75   000FDB                     plusw2          equ	4059
+    76   000FED                     postdec0        equ	4077
+    77   000FE5                     postdec1        equ	4069
+    78   000FDD                     postdec2        equ	4061
+    79   000FEE                     postinc0        equ	4078
+    80   000FE6                     postinc1        equ	4070
+    81   000FDE                     postinc2        equ	4062
+    82   000FEC                     preinc0         equ	4076
+    83   000FE4                     preinc1         equ	4068
+    84   000FDC                     preinc2         equ	4060
+    85   000FF3                     prod            equ	4083
+    86   000FF4                     prodh           equ	4084
+    87   000FF3                     prodl           equ	4083
+    88   000FD8                     status          equ	4056
+    89   000FF5                     tablat          equ	4085
+    90   000FF6                     tblptr          equ	4086
+    91   000FF7                     tblptrh         equ	4087
+    92   000FF6                     tblptrl         equ	4086
+    93   000FF8                     tblptru         equ	4088
+    94   000FFD                     tosl            equ	4093
+    95   000FE8                     wreg            equ	4072
+    96   000F62                     SPPDATA         equ	3938	;# 
+    97   000F63                     SPPCFG          equ	3939	;# 
+    98   000F64                     SPPEPS          equ	3940	;# 
+    99   000F65                     SPPCON          equ	3941	;# 
+   100   000F66                     UFRM            equ	3942	;# 
+   101   000F66                     UFRML           equ	3942	;# 
+   102   000F67                     UFRMH           equ	3943	;# 
+   103   000F68                     UIR             equ	3944	;# 
+   104   000F69                     UIE             equ	3945	;# 
+   105   000F6A                     UEIR            equ	3946	;# 
+   106   000F6B                     UEIE            equ	3947	;# 
+   107   000F6C                     USTAT           equ	3948	;# 
+   108   000F6D                     UCON            equ	3949	;# 
+   109   000F6E                     UADDR           equ	3950	;# 
+   110   000F6F                     UCFG            equ	3951	;# 
+   111   000F70                     UEP0            equ	3952	;# 
+   112   000F71                     UEP1            equ	3953	;# 
+   113   000F72                     UEP2            equ	3954	;# 
+   114   000F73                     UEP3            equ	3955	;# 
+   115   000F74                     UEP4            equ	3956	;# 
+   116   000F75                     UEP5            equ	3957	;# 
+   117   000F76                     UEP6            equ	3958	;# 
+   118   000F77                     UEP7            equ	3959	;# 
+   119   000F78                     UEP8            equ	3960	;# 
+   120   000F79                     UEP9            equ	3961	;# 
+   121   000F7A                     UEP10           equ	3962	;# 
+   122   000F7B                     UEP11           equ	3963	;# 
+   123   000F7C                     UEP12           equ	3964	;# 
+   124   000F7D                     UEP13           equ	3965	;# 
+   125   000F7E                     UEP14           equ	3966	;# 
+   126   000F7F                     UEP15           equ	3967	;# 
+   127   000F80                     PORTA           equ	3968	;# 
+   128   000F81                     PORTB           equ	3969	;# 
+   129   000F82                     PORTC           equ	3970	;# 
+   130   000F83                     PORTD           equ	3971	;# 
+   131   000F84                     PORTE           equ	3972	;# 
+   132   000F89                     LATA            equ	3977	;# 
+   133   000F8A                     LATB            equ	3978	;# 
+   134   000F8B                     LATC            equ	3979	;# 
+   135   000F8C                     LATD            equ	3980	;# 
+   136   000F8D                     LATE            equ	3981	;# 
+   137   000F92                     TRISA           equ	3986	;# 
+   138   000F92                     DDRA            equ	3986	;# 
+   139   000F93                     TRISB           equ	3987	;# 
+   140   000F93                     DDRB            equ	3987	;# 
+   141   000F94                     TRISC           equ	3988	;# 
+   142   000F94                     DDRC            equ	3988	;# 
+   143   000F95                     TRISD           equ	3989	;# 
+   144   000F95                     DDRD            equ	3989	;# 
+   145   000F96                     TRISE           equ	3990	;# 
+   146   000F96                     DDRE            equ	3990	;# 
+   147   000F9B                     OSCTUNE         equ	3995	;# 
+   148   000F9D                     PIE1            equ	3997	;# 
+   149   000F9E                     PIR1            equ	3998	;# 
+   150   000F9F                     IPR1            equ	3999	;# 
+   151   000FA0                     PIE2            equ	4000	;# 
+   152   000FA1                     PIR2            equ	4001	;# 
+   153   000FA2                     IPR2            equ	4002	;# 
+   154   000FA6                     EECON1          equ	4006	;# 
+   155   000FA7                     EECON2          equ	4007	;# 
+   156   000FA8                     EEDATA          equ	4008	;# 
+   157   000FA9                     EEADR           equ	4009	;# 
+   158   000FAB                     RCSTA           equ	4011	;# 
+   159   000FAB                     RCSTA1          equ	4011	;# 
+   160   000FAC                     TXSTA           equ	4012	;# 
+   161   000FAC                     TXSTA1          equ	4012	;# 
+   162   000FAD                     TXREG           equ	4013	;# 
+   163   000FAD                     TXREG1          equ	4013	;# 
+   164   000FAE                     RCREG           equ	4014	;# 
+   165   000FAE                     RCREG1          equ	4014	;# 
+   166   000FAF                     SPBRG           equ	4015	;# 
+   167   000FAF                     SPBRG1          equ	4015	;# 
+   168   000FB0                     SPBRGH          equ	4016	;# 
+   169   000FB1                     T3CON           equ	4017	;# 
+   170   000FB2                     TMR3            equ	4018	;# 
+   171   000FB2                     TMR3L           equ	4018	;# 
+   172   000FB3                     TMR3H           equ	4019	;# 
+   173   000FB4                     CMCON           equ	4020	;# 
+   174   000FB5                     CVRCON          equ	4021	;# 
+   175   000FB6                     ECCP1AS         equ	4022	;# 
+   176   000FB6                     CCP1AS          equ	4022	;# 
+   177   000FB7                     ECCP1DEL        equ	4023	;# 
+   178   000FB7                     CCP1DEL         equ	4023	;# 
+   179   000FB8                     BAUDCON         equ	4024	;# 
+   180   000FB8                     BAUDCTL         equ	4024	;# 
+   181   000FBA                     CCP2CON         equ	4026	;# 
+   182   000FBB                     CCPR2           equ	4027	;# 
+   183   000FBB                     CCPR2L          equ	4027	;# 
+   184   000FBC                     CCPR2H          equ	4028	;# 
+   185   000FBD                     CCP1CON         equ	4029	;# 
+   186   000FBD                     ECCP1CON        equ	4029	;# 
+   187   000FBE                     CCPR1           equ	4030	;# 
+   188   000FBE                     CCPR1L          equ	4030	;# 
+   189   000FBF                     CCPR1H          equ	4031	;# 
+   190   000FC0                     ADCON2          equ	4032	;# 
+   191   000FC1                     ADCON1          equ	4033	;# 
+   192   000FC2                     ADCON0          equ	4034	;# 
+   193   000FC3                     ADRES           equ	4035	;# 
+   194   000FC3                     ADRESL          equ	4035	;# 
+   195   000FC4                     ADRESH          equ	4036	;# 
+   196   000FC5                     SSPCON2         equ	4037	;# 
+   197   000FC6                     SSPCON1         equ	4038	;# 
+   198   000FC7                     SSPSTAT         equ	4039	;# 
+   199   000FC8                     SSPADD          equ	4040	;# 
+   200   000FC9                     SSPBUF          equ	4041	;# 
+   201   000FCA                     T2CON           equ	4042	;# 
+   202   000FCB                     PR2             equ	4043	;# 
+   203   000FCB                     MEMCON          equ	4043	;# 
+   204   000FCC                     TMR2            equ	4044	;# 
+   205   000FCD                     T1CON           equ	4045	;# 
+   206   000FCE                     TMR1            equ	4046	;# 
+   207   000FCE                     TMR1L           equ	4046	;# 
+   208   000FCF                     TMR1H           equ	4047	;# 
+   209   000FD0                     RCON            equ	4048	;# 
+   210   000FD1                     WDTCON          equ	4049	;# 
+   211   000FD2                     HLVDCON         equ	4050	;# 
+   212   000FD2                     LVDCON          equ	4050	;# 
+   213   000FD3                     OSCCON          equ	4051	;# 
+   214   000FD5                     T0CON           equ	4053	;# 
+   215   000FD6                     TMR0            equ	4054	;# 
+   216   000FD6                     TMR0L           equ	4054	;# 
+   217   000FD7                     TMR0H           equ	4055	;# 
+   218   000FD8                     STATUS          equ	4056	;# 
+   219   000FD9                     FSR2            equ	4057	;# 
+   220   000FD9                     FSR2L           equ	4057	;# 
+   221   000FDA                     FSR2H           equ	4058	;# 
+   222   000FDB                     PLUSW2          equ	4059	;# 
+   223   000FDC                     PREINC2         equ	4060	;# 
+   224   000FDD                     POSTDEC2        equ	4061	;# 
+   225   000FDE                     POSTINC2        equ	4062	;# 
+   226   000FDF                     INDF2           equ	4063	;# 
+   227   000FE0                     BSR             equ	4064	;# 
+   228   000FE1                     FSR1            equ	4065	;# 
+   229   000FE1                     FSR1L           equ	4065	;# 
+   230   000FE2                     FSR1H           equ	4066	;# 
+   231   000FE3                     PLUSW1          equ	4067	;# 
+   232   000FE4                     PREINC1         equ	4068	;# 
+   233   000FE5                     POSTDEC1        equ	4069	;# 
+   234   000FE6                     POSTINC1        equ	4070	;# 
+   235   000FE7                     INDF1           equ	4071	;# 
+   236   000FE8                     WREG            equ	4072	;# 
+   237   000FE9                     FSR0            equ	4073	;# 
+   238   000FE9                     FSR0L           equ	4073	;# 
+   239   000FEA                     FSR0H           equ	4074	;# 
+   240   000FEB                     PLUSW0          equ	4075	;# 
+   241   000FEC                     PREINC0         equ	4076	;# 
+   242   000FED                     POSTDEC0        equ	4077	;# 
+   243   000FEE                     POSTINC0        equ	4078	;# 
+   244   000FEF                     INDF0           equ	4079	;# 
+   245   000FF0                     INTCON3         equ	4080	;# 
+   246   000FF1                     INTCON2         equ	4081	;# 
+   247   000FF2                     INTCON          equ	4082	;# 
+   248   000FF3                     PROD            equ	4083	;# 
+   249   000FF3                     PRODL           equ	4083	;# 
+   250   000FF4                     PRODH           equ	4084	;# 
+   251   000FF5                     TABLAT          equ	4085	;# 
+   252   000FF6                     TBLPTR          equ	4086	;# 
+   253   000FF6                     TBLPTRL         equ	4086	;# 
+   254   000FF7                     TBLPTRH         equ	4087	;# 
+   255   000FF8                     TBLPTRU         equ	4088	;# 
+   256   000FF9                     PCLAT           equ	4089	;# 
+   257   000FF9                     PC              equ	4089	;# 
+   258   000FF9                     PCL             equ	4089	;# 
+   259   000FFA                     PCLATH          equ	4090	;# 
+   260   000FFB                     PCLATU          equ	4091	;# 
+   261   000FFC                     STKPTR          equ	4092	;# 
+   262   000FFD                     TOS             equ	4093	;# 
+   263   000FFD                     TOSL            equ	4093	;# 
+   264   000FFE                     TOSH            equ	4094	;# 
+   265   000FFF                     TOSU            equ	4095	;# 
+   266   000F62                     SPPDATA         equ	3938	;# 
+   267   000F63                     SPPCFG          equ	3939	;# 
+   268   000F64                     SPPEPS          equ	3940	;# 
+   269   000F65                     SPPCON          equ	3941	;# 
+   270   000F66                     UFRM            equ	3942	;# 
+   271   000F66                     UFRML           equ	3942	;# 
+   272   000F67                     UFRMH           equ	3943	;# 
+   273   000F68                     UIR             equ	3944	;# 
+   274   000F69                     UIE             equ	3945	;# 
+   275   000F6A                     UEIR            equ	3946	;# 
+   276   000F6B                     UEIE            equ	3947	;# 
+   277   000F6C                     USTAT           equ	3948	;# 
+   278   000F6D                     UCON            equ	3949	;# 
+   279   000F6E                     UADDR           equ	3950	;# 
+   280   000F6F                     UCFG            equ	3951	;# 
+   281   000F70                     UEP0            equ	3952	;# 
+   282   000F71                     UEP1            equ	3953	;# 
+   283   000F72                     UEP2            equ	3954	;# 
+   284   000F73                     UEP3            equ	3955	;# 
+   285   000F74                     UEP4            equ	3956	;# 
+   286   000F75                     UEP5            equ	3957	;# 
+   287   000F76                     UEP6            equ	3958	;# 
+   288   000F77                     UEP7            equ	3959	;# 
+   289   000F78                     UEP8            equ	3960	;# 
+   290   000F79                     UEP9            equ	3961	;# 
+   291   000F7A                     UEP10           equ	3962	;# 
+   292   000F7B                     UEP11           equ	3963	;# 
+   293   000F7C                     UEP12           equ	3964	;# 
+   294   000F7D                     UEP13           equ	3965	;# 
+   295   000F7E                     UEP14           equ	3966	;# 
+   296   000F7F                     UEP15           equ	3967	;# 
+   297   000F80                     PORTA           equ	3968	;# 
+   298   000F81                     PORTB           equ	3969	;# 
+   299   000F82                     PORTC           equ	3970	;# 
+   300   000F83                     PORTD           equ	3971	;# 
+   301   000F84                     PORTE           equ	3972	;# 
+   302   000F89                     LATA            equ	3977	;# 
+   303   000F8A                     LATB            equ	3978	;# 
+   304   000F8B                     LATC            equ	3979	;# 
+   305   000F8C                     LATD            equ	3980	;# 
+   306   000F8D                     LATE            equ	3981	;# 
+   307   000F92                     TRISA           equ	3986	;# 
+   308   000F92                     DDRA            equ	3986	;# 
+   309   000F93                     TRISB           equ	3987	;# 
+   310   000F93                     DDRB            equ	3987	;# 
+   311   000F94                     TRISC           equ	3988	;# 
+   312   000F94                     DDRC            equ	3988	;# 
+   313   000F95                     TRISD           equ	3989	;# 
+   314   000F95                     DDRD            equ	3989	;# 
+   315   000F96                     TRISE           equ	3990	;# 
+   316   000F96                     DDRE            equ	3990	;# 
+   317   000F9B                     OSCTUNE         equ	3995	;# 
+   318   000F9D                     PIE1            equ	3997	;# 
+   319   000F9E                     PIR1            equ	3998	;# 
+   320   000F9F                     IPR1            equ	3999	;# 
+   321   000FA0                     PIE2            equ	4000	;# 
+   322   000FA1                     PIR2            equ	4001	;# 
+   323   000FA2                     IPR2            equ	4002	;# 
+   324   000FA6                     EECON1          equ	4006	;# 
+   325   000FA7                     EECON2          equ	4007	;# 
+   326   000FA8                     EEDATA          equ	4008	;# 
+   327   000FA9                     EEADR           equ	4009	;# 
+   328   000FAB                     RCSTA           equ	4011	;# 
+   329   000FAB                     RCSTA1          equ	4011	;# 
+   330   000FAC                     TXSTA           equ	4012	;# 
+   331   000FAC                     TXSTA1          equ	4012	;# 
+   332   000FAD                     TXREG           equ	4013	;# 
+   333   000FAD                     TXREG1          equ	4013	;# 
+   334   000FAE                     RCREG           equ	4014	;# 
+   335   000FAE                     RCREG1          equ	4014	;# 
+   336   000FAF                     SPBRG           equ	4015	;# 
+   337   000FAF                     SPBRG1          equ	4015	;# 
+   338   000FB0                     SPBRGH          equ	4016	;# 
+   339   000FB1                     T3CON           equ	4017	;# 
+   340   000FB2                     TMR3            equ	4018	;# 
+   341   000FB2                     TMR3L           equ	4018	;# 
+   342   000FB3                     TMR3H           equ	4019	;# 
+   343   000FB4                     CMCON           equ	4020	;# 
+   344   000FB5                     CVRCON          equ	4021	;# 
+   345   000FB6                     ECCP1AS         equ	4022	;# 
+   346   000FB6                     CCP1AS          equ	4022	;# 
+   347   000FB7                     ECCP1DEL        equ	4023	;# 
+   348   000FB7                     CCP1DEL         equ	4023	;# 
+   349   000FB8                     BAUDCON         equ	4024	;# 
+   350   000FB8                     BAUDCTL         equ	4024	;# 
+   351   000FBA                     CCP2CON         equ	4026	;# 
+   352   000FBB                     CCPR2           equ	4027	;# 
+   353   000FBB                     CCPR2L          equ	4027	;# 
+   354   000FBC                     CCPR2H          equ	4028	;# 
+   355   000FBD                     CCP1CON         equ	4029	;# 
+   356   000FBD                     ECCP1CON        equ	4029	;# 
+   357   000FBE                     CCPR1           equ	4030	;# 
+   358   000FBE                     CCPR1L          equ	4030	;# 
+   359   000FBF                     CCPR1H          equ	4031	;# 
+   360   000FC0                     ADCON2          equ	4032	;# 
+   361   000FC1                     ADCON1          equ	4033	;# 
+   362   000FC2                     ADCON0          equ	4034	;# 
+   363   000FC3                     ADRES           equ	4035	;# 
+   364   000FC3                     ADRESL          equ	4035	;# 
+   365   000FC4                     ADRESH          equ	4036	;# 
+   366   000FC5                     SSPCON2         equ	4037	;# 
+   367   000FC6                     SSPCON1         equ	4038	;# 
+   368   000FC7                     SSPSTAT         equ	4039	;# 
+   369   000FC8                     SSPADD          equ	4040	;# 
+   370   000FC9                     SSPBUF          equ	4041	;# 
+   371   000FCA                     T2CON           equ	4042	;# 
+   372   000FCB                     PR2             equ	4043	;# 
+   373   000FCB                     MEMCON          equ	4043	;# 
+   374   000FCC                     TMR2            equ	4044	;# 
+   375   000FCD                     T1CON           equ	4045	;# 
+   376   000FCE                     TMR1            equ	4046	;# 
+   377   000FCE                     TMR1L           equ	4046	;# 
+   378   000FCF                     TMR1H           equ	4047	;# 
+   379   000FD0                     RCON            equ	4048	;# 
+   380   000FD1                     WDTCON          equ	4049	;# 
+   381   000FD2                     HLVDCON         equ	4050	;# 
+   382   000FD2                     LVDCON          equ	4050	;# 
+   383   000FD3                     OSCCON          equ	4051	;# 
+   384   000FD5                     T0CON           equ	4053	;# 
+   385   000FD6                     TMR0            equ	4054	;# 
+   386   000FD6                     TMR0L           equ	4054	;# 
+   387   000FD7                     TMR0H           equ	4055	;# 
+   388   000FD8                     STATUS          equ	4056	;# 
+   389   000FD9                     FSR2            equ	4057	;# 
+   390   000FD9                     FSR2L           equ	4057	;# 
+   391   000FDA                     FSR2H           equ	4058	;# 
+   392   000FDB                     PLUSW2          equ	4059	;# 
+   393   000FDC                     PREINC2         equ	4060	;# 
+   394   000FDD                     POSTDEC2        equ	4061	;# 
+   395   000FDE                     POSTINC2        equ	4062	;# 
+   396   000FDF                     INDF2           equ	4063	;# 
+   397   000FE0                     BSR             equ	4064	;# 
+   398   000FE1                     FSR1            equ	4065	;# 
+   399   000FE1                     FSR1L           equ	4065	;# 
+   400   000FE2                     FSR1H           equ	4066	;# 
+   401   000FE3                     PLUSW1          equ	4067	;# 
+   402   000FE4                     PREINC1         equ	4068	;# 
+   403   000FE5                     POSTDEC1        equ	4069	;# 
+   404   000FE6                     POSTINC1        equ	4070	;# 
+   405   000FE7                     INDF1           equ	4071	;# 
+   406   000FE8                     WREG            equ	4072	;# 
+   407   000FE9                     FSR0            equ	4073	;# 
+   408   000FE9                     FSR0L           equ	4073	;# 
+   409   000FEA                     FSR0H           equ	4074	;# 
+   410   000FEB                     PLUSW0          equ	4075	;# 
+   411   000FEC                     PREINC0         equ	4076	;# 
+   412   000FED                     POSTDEC0        equ	4077	;# 
+   413   000FEE                     POSTINC0        equ	4078	;# 
+   414   000FEF                     INDF0           equ	4079	;# 
+   415   000FF0                     INTCON3         equ	4080	;# 
+   416   000FF1                     INTCON2         equ	4081	;# 
+   417   000FF2                     INTCON          equ	4082	;# 
+   418   000FF3                     PROD            equ	4083	;# 
+   419   000FF3                     PRODL           equ	4083	;# 
+   420   000FF4                     PRODH           equ	4084	;# 
+   421   000FF5                     TABLAT          equ	4085	;# 
+   422   000FF6                     TBLPTR          equ	4086	;# 
+   423   000FF6                     TBLPTRL         equ	4086	;# 
+   424   000FF7                     TBLPTRH         equ	4087	;# 
+   425   000FF8                     TBLPTRU         equ	4088	;# 
+   426   000FF9                     PCLAT           equ	4089	;# 
+   427   000FF9                     PC              equ	4089	;# 
+   428   000FF9                     PCL             equ	4089	;# 
+   429   000FFA                     PCLATH          equ	4090	;# 
+   430   000FFB                     PCLATU          equ	4091	;# 
+   431   000FFC                     STKPTR          equ	4092	;# 
+   432   000FFD                     TOS             equ	4093	;# 
+   433   000FFD                     TOSL            equ	4093	;# 
+   434   000FFE                     TOSH            equ	4094	;# 
+   435   000FFF                     TOSU            equ	4095	;# 
+   436   000F62                     SPPDATA         equ	3938	;# 
+   437   000F63                     SPPCFG          equ	3939	;# 
+   438   000F64                     SPPEPS          equ	3940	;# 
+   439   000F65                     SPPCON          equ	3941	;# 
+   440   000F66                     UFRM            equ	3942	;# 
+   441   000F66                     UFRML           equ	3942	;# 
+   442   000F67                     UFRMH           equ	3943	;# 
+   443   000F68                     UIR             equ	3944	;# 
+   444   000F69                     UIE             equ	3945	;# 
+   445   000F6A                     UEIR            equ	3946	;# 
+   446   000F6B                     UEIE            equ	3947	;# 
+   447   000F6C                     USTAT           equ	3948	;# 
+   448   000F6D                     UCON            equ	3949	;# 
+   449   000F6E                     UADDR           equ	3950	;# 
+   450   000F6F                     UCFG            equ	3951	;# 
+   451   000F70                     UEP0            equ	3952	;# 
+   452   000F71                     UEP1            equ	3953	;# 
+   453   000F72                     UEP2            equ	3954	;# 
+   454   000F73                     UEP3            equ	3955	;# 
+   455   000F74                     UEP4            equ	3956	;# 
+   456   000F75                     UEP5            equ	3957	;# 
+   457   000F76                     UEP6            equ	3958	;# 
+   458   000F77                     UEP7            equ	3959	;# 
+   459   000F78                     UEP8            equ	3960	;# 
+   460   000F79                     UEP9            equ	3961	;# 
+   461   000F7A                     UEP10           equ	3962	;# 
+   462   000F7B                     UEP11           equ	3963	;# 
+   463   000F7C                     UEP12           equ	3964	;# 
+   464   000F7D                     UEP13           equ	3965	;# 
+   465   000F7E                     UEP14           equ	3966	;# 
+   466   000F7F                     UEP15           equ	3967	;# 
+   467   000F80                     PORTA           equ	3968	;# 
+   468   000F81                     PORTB           equ	3969	;# 
+   469   000F82                     PORTC           equ	3970	;# 
+   470   000F83                     PORTD           equ	3971	;# 
+   471   000F84                     PORTE           equ	3972	;# 
+   472   000F89                     LATA            equ	3977	;# 
+   473   000F8A                     LATB            equ	3978	;# 
+   474   000F8B                     LATC            equ	3979	;# 
+   475   000F8C                     LATD            equ	3980	;# 
+   476   000F8D                     LATE            equ	3981	;# 
+   477   000F92                     TRISA           equ	3986	;# 
+   478   000F92                     DDRA            equ	3986	;# 
+   479   000F93                     TRISB           equ	3987	;# 
+   480   000F93                     DDRB            equ	3987	;# 
+   481   000F94                     TRISC           equ	3988	;# 
+   482   000F94                     DDRC            equ	3988	;# 
+   483   000F95                     TRISD           equ	3989	;# 
+   484   000F95                     DDRD            equ	3989	;# 
+   485   000F96                     TRISE           equ	3990	;# 
+   486   000F96                     DDRE            equ	3990	;# 
+   487   000F9B                     OSCTUNE         equ	3995	;# 
+   488   000F9D                     PIE1            equ	3997	;# 
+   489   000F9E                     PIR1            equ	3998	;# 
+   490   000F9F                     IPR1            equ	3999	;# 
+   491   000FA0                     PIE2            equ	4000	;# 
+   492   000FA1                     PIR2            equ	4001	;# 
+   493   000FA2                     IPR2            equ	4002	;# 
+   494   000FA6                     EECON1          equ	4006	;# 
+   495   000FA7                     EECON2          equ	4007	;# 
+   496   000FA8                     EEDATA          equ	4008	;# 
+   497   000FA9                     EEADR           equ	4009	;# 
+   498   000FAB                     RCSTA           equ	4011	;# 
+   499   000FAB                     RCSTA1          equ	4011	;# 
+   500   000FAC                     TXSTA           equ	4012	;# 
+   501   000FAC                     TXSTA1          equ	4012	;# 
+   502   000FAD                     TXREG           equ	4013	;# 
+   503   000FAD                     TXREG1          equ	4013	;# 
+   504   000FAE                     RCREG           equ	4014	;# 
+   505   000FAE                     RCREG1          equ	4014	;# 
+   506   000FAF                     SPBRG           equ	4015	;# 
+   507   000FAF                     SPBRG1          equ	4015	;# 
+   508   000FB0                     SPBRGH          equ	4016	;# 
+   509   000FB1                     T3CON           equ	4017	;# 
+   510   000FB2                     TMR3            equ	4018	;# 
+   511   000FB2                     TMR3L           equ	4018	;# 
+   512   000FB3                     TMR3H           equ	4019	;# 
+   513   000FB4                     CMCON           equ	4020	;# 
+   514   000FB5                     CVRCON          equ	4021	;# 
+   515   000FB6                     ECCP1AS         equ	4022	;# 
+   516   000FB6                     CCP1AS          equ	4022	;# 
+   517   000FB7                     ECCP1DEL        equ	4023	;# 
+   518   000FB7                     CCP1DEL         equ	4023	;# 
+   519   000FB8                     BAUDCON         equ	4024	;# 
+   520   000FB8                     BAUDCTL         equ	4024	;# 
+   521   000FBA                     CCP2CON         equ	4026	;# 
+   522   000FBB                     CCPR2           equ	4027	;# 
+   523   000FBB                     CCPR2L          equ	4027	;# 
+   524   000FBC                     CCPR2H          equ	4028	;# 
+   525   000FBD                     CCP1CON         equ	4029	;# 
+   526   000FBD                     ECCP1CON        equ	4029	;# 
+   527   000FBE                     CCPR1           equ	4030	;# 
+   528   000FBE                     CCPR1L          equ	4030	;# 
+   529   000FBF                     CCPR1H          equ	4031	;# 
+   530   000FC0                     ADCON2          equ	4032	;# 
+   531   000FC1                     ADCON1          equ	4033	;# 
+   532   000FC2                     ADCON0          equ	4034	;# 
+   533   000FC3                     ADRES           equ	4035	;# 
+   534   000FC3                     ADRESL          equ	4035	;# 
+   535   000FC4                     ADRESH          equ	4036	;# 
+   536   000FC5                     SSPCON2         equ	4037	;# 
+   537   000FC6                     SSPCON1         equ	4038	;# 
+   538   000FC7                     SSPSTAT         equ	4039	;# 
+   539   000FC8                     SSPADD          equ	4040	;# 
+   540   000FC9                     SSPBUF          equ	4041	;# 
+   541   000FCA                     T2CON           equ	4042	;# 
+   542   000FCB                     PR2             equ	4043	;# 
+   543   000FCB                     MEMCON          equ	4043	;# 
+   544   000FCC                     TMR2            equ	4044	;# 
+   545   000FCD                     T1CON           equ	4045	;# 
+   546   000FCE                     TMR1            equ	4046	;# 
+   547   000FCE                     TMR1L           equ	4046	;# 
+   548   000FCF                     TMR1H           equ	4047	;# 
+   549   000FD0                     RCON            equ	4048	;# 
+   550   000FD1                     WDTCON          equ	4049	;# 
+   551   000FD2                     HLVDCON         equ	4050	;# 
+   552   000FD2                     LVDCON          equ	4050	;# 
+   553   000FD3                     OSCCON          equ	4051	;# 
+   554   000FD5                     T0CON           equ	4053	;# 
+   555   000FD6                     TMR0            equ	4054	;# 
+   556   000FD6                     TMR0L           equ	4054	;# 
+   557   000FD7                     TMR0H           equ	4055	;# 
+   558   000FD8                     STATUS          equ	4056	;# 
+   559   000FD9                     FSR2            equ	4057	;# 
+   560   000FD9                     FSR2L           equ	4057	;# 
+   561   000FDA                     FSR2H           equ	4058	;# 
+   562   000FDB                     PLUSW2          equ	4059	;# 
+   563   000FDC                     PREINC2         equ	4060	;# 
+   564   000FDD                     POSTDEC2        equ	4061	;# 
+   565   000FDE                     POSTINC2        equ	4062	;# 
+   566   000FDF                     INDF2           equ	4063	;# 
+   567   000FE0                     BSR             equ	4064	;# 
+   568   000FE1                     FSR1            equ	4065	;# 
+   569   000FE1                     FSR1L           equ	4065	;# 
+   570   000FE2                     FSR1H           equ	4066	;# 
+   571   000FE3                     PLUSW1          equ	4067	;# 
+   572   000FE4                     PREINC1         equ	4068	;# 
+   573   000FE5                     POSTDEC1        equ	4069	;# 
+   574   000FE6                     POSTINC1        equ	4070	;# 
+   575   000FE7                     INDF1           equ	4071	;# 
+   576   000FE8                     WREG            equ	4072	;# 
+   577   000FE9                     FSR0            equ	4073	;# 
+   578   000FE9                     FSR0L           equ	4073	;# 
+   579   000FEA                     FSR0H           equ	4074	;# 
+   580   000FEB                     PLUSW0          equ	4075	;# 
+   581   000FEC                     PREINC0         equ	4076	;# 
+   582   000FED                     POSTDEC0        equ	4077	;# 
+   583   000FEE                     POSTINC0        equ	4078	;# 
+   584   000FEF                     INDF0           equ	4079	;# 
+   585   000FF0                     INTCON3         equ	4080	;# 
+   586   000FF1                     INTCON2         equ	4081	;# 
+   587   000FF2                     INTCON          equ	4082	;# 
+   588   000FF3                     PROD            equ	4083	;# 
+   589   000FF3                     PRODL           equ	4083	;# 
+   590   000FF4                     PRODH           equ	4084	;# 
+   591   000FF5                     TABLAT          equ	4085	;# 
+   592   000FF6                     TBLPTR          equ	4086	;# 
+   593   000FF6                     TBLPTRL         equ	4086	;# 
+   594   000FF7                     TBLPTRH         equ	4087	;# 
+   595   000FF8                     TBLPTRU         equ	4088	;# 
+   596   000FF9                     PCLAT           equ	4089	;# 
+   597   000FF9                     PC              equ	4089	;# 
+   598   000FF9                     PCL             equ	4089	;# 
+   599   000FFA                     PCLATH          equ	4090	;# 
+   600   000FFB                     PCLATU          equ	4091	;# 
+   601   000FFC                     STKPTR          equ	4092	;# 
+   602   000FFD                     TOS             equ	4093	;# 
+   603   000FFD                     TOSL            equ	4093	;# 
+   604   000FFE                     TOSH            equ	4094	;# 
+   605   000FFF                     TOSU            equ	4095	;# 
+   606   000F62                     SPPDATA         equ	3938	;# 
+   607   000F63                     SPPCFG          equ	3939	;# 
+   608   000F64                     SPPEPS          equ	3940	;# 
+   609   000F65                     SPPCON          equ	3941	;# 
+   610   000F66                     UFRM            equ	3942	;# 
+   611   000F66                     UFRML           equ	3942	;# 
+   612   000F67                     UFRMH           equ	3943	;# 
+   613   000F68                     UIR             equ	3944	;# 
+   614   000F69                     UIE             equ	3945	;# 
+   615   000F6A                     UEIR            equ	3946	;# 
+   616   000F6B                     UEIE            equ	3947	;# 
+   617   000F6C                     USTAT           equ	3948	;# 
+   618   000F6D                     UCON            equ	3949	;# 
+   619   000F6E                     UADDR           equ	3950	;# 
+   620   000F6F                     UCFG            equ	3951	;# 
+   621   000F70                     UEP0            equ	3952	;# 
+   622   000F71                     UEP1            equ	3953	;# 
+   623   000F72                     UEP2            equ	3954	;# 
+   624   000F73                     UEP3            equ	3955	;# 
+   625   000F74                     UEP4            equ	3956	;# 
+   626   000F75                     UEP5            equ	3957	;# 
+   627   000F76                     UEP6            equ	3958	;# 
+   628   000F77                     UEP7            equ	3959	;# 
+   629   000F78                     UEP8            equ	3960	;# 
+   630   000F79                     UEP9            equ	3961	;# 
+   631   000F7A                     UEP10           equ	3962	;# 
+   632   000F7B                     UEP11           equ	3963	;# 
+   633   000F7C                     UEP12           equ	3964	;# 
+   634   000F7D                     UEP13           equ	3965	;# 
+   635   000F7E                     UEP14           equ	3966	;# 
+   636   000F7F                     UEP15           equ	3967	;# 
+   637   000F80                     PORTA           equ	3968	;# 
+   638   000F81                     PORTB           equ	3969	;# 
+   639   000F82                     PORTC           equ	3970	;# 
+   640   000F83                     PORTD           equ	3971	;# 
+   641   000F84                     PORTE           equ	3972	;# 
+   642   000F89                     LATA            equ	3977	;# 
+   643   000F8A                     LATB            equ	3978	;# 
+   644   000F8B                     LATC            equ	3979	;# 
+   645   000F8C                     LATD            equ	3980	;# 
+   646   000F8D                     LATE            equ	3981	;# 
+   647   000F92                     TRISA           equ	3986	;# 
+   648   000F92                     DDRA            equ	3986	;# 
+   649   000F93                     TRISB           equ	3987	;# 
+   650   000F93                     DDRB            equ	3987	;# 
+   651   000F94                     TRISC           equ	3988	;# 
+   652   000F94                     DDRC            equ	3988	;# 
+   653   000F95                     TRISD           equ	3989	;# 
+   654   000F95                     DDRD            equ	3989	;# 
+   655   000F96                     TRISE           equ	3990	;# 
+   656   000F96                     DDRE            equ	3990	;# 
+   657   000F9B                     OSCTUNE         equ	3995	;# 
+   658   000F9D                     PIE1            equ	3997	;# 
+   659   000F9E                     PIR1            equ	3998	;# 
+   660   000F9F                     IPR1            equ	3999	;# 
+   661   000FA0                     PIE2            equ	4000	;# 
+   662   000FA1                     PIR2            equ	4001	;# 
+   663   000FA2                     IPR2            equ	4002	;# 
+   664   000FA6                     EECON1          equ	4006	;# 
+   665   000FA7                     EECON2          equ	4007	;# 
+   666   000FA8                     EEDATA          equ	4008	;# 
+   667   000FA9                     EEADR           equ	4009	;# 
+   668   000FAB                     RCSTA           equ	4011	;# 
+   669   000FAB                     RCSTA1          equ	4011	;# 
+   670   000FAC                     TXSTA           equ	4012	;# 
+   671   000FAC                     TXSTA1          equ	4012	;# 
+   672   000FAD                     TXREG           equ	4013	;# 
+   673   000FAD                     TXREG1          equ	4013	;# 
+   674   000FAE                     RCREG           equ	4014	;# 
+   675   000FAE                     RCREG1          equ	4014	;# 
+   676   000FAF                     SPBRG           equ	4015	;# 
+   677   000FAF                     SPBRG1          equ	4015	;# 
+   678   000FB0                     SPBRGH          equ	4016	;# 
+   679   000FB1                     T3CON           equ	4017	;# 
+   680   000FB2                     TMR3            equ	4018	;# 
+   681   000FB2                     TMR3L           equ	4018	;# 
+   682   000FB3                     TMR3H           equ	4019	;# 
+   683   000FB4                     CMCON           equ	4020	;# 
+   684   000FB5                     CVRCON          equ	4021	;# 
+   685   000FB6                     ECCP1AS         equ	4022	;# 
+   686   000FB6                     CCP1AS          equ	4022	;# 
+   687   000FB7                     ECCP1DEL        equ	4023	;# 
+   688   000FB7                     CCP1DEL         equ	4023	;# 
+   689   000FB8                     BAUDCON         equ	4024	;# 
+   690   000FB8                     BAUDCTL         equ	4024	;# 
+   691   000FBA                     CCP2CON         equ	4026	;# 
+   692   000FBB                     CCPR2           equ	4027	;# 
+   693   000FBB                     CCPR2L          equ	4027	;# 
+   694   000FBC                     CCPR2H          equ	4028	;# 
+   695   000FBD                     CCP1CON         equ	4029	;# 
+   696   000FBD                     ECCP1CON        equ	4029	;# 
+   697   000FBE                     CCPR1           equ	4030	;# 
+   698   000FBE                     CCPR1L          equ	4030	;# 
+   699   000FBF                     CCPR1H          equ	4031	;# 
+   700   000FC0                     ADCON2          equ	4032	;# 
+   701   000FC1                     ADCON1          equ	4033	;# 
+   702   000FC2                     ADCON0          equ	4034	;# 
+   703   000FC3                     ADRES           equ	4035	;# 
+   704   000FC3                     ADRESL          equ	4035	;# 
+   705   000FC4                     ADRESH          equ	4036	;# 
+   706   000FC5                     SSPCON2         equ	4037	;# 
+   707   000FC6                     SSPCON1         equ	4038	;# 
+   708   000FC7                     SSPSTAT         equ	4039	;# 
+   709   000FC8                     SSPADD          equ	4040	;# 
+   710   000FC9                     SSPBUF          equ	4041	;# 
+   711   000FCA                     T2CON           equ	4042	;# 
+   712   000FCB                     PR2             equ	4043	;# 
+   713   000FCB                     MEMCON          equ	4043	;# 
+   714   000FCC                     TMR2            equ	4044	;# 
+   715   000FCD                     T1CON           equ	4045	;# 
+   716   000FCE                     TMR1            equ	4046	;# 
+   717   000FCE                     TMR1L           equ	4046	;# 
+   718   000FCF                     TMR1H           equ	4047	;# 
+   719   000FD0                     RCON            equ	4048	;# 
+   720   000FD1                     WDTCON          equ	4049	;# 
+   721   000FD2                     HLVDCON         equ	4050	;# 
+   722   000FD2                     LVDCON          equ	4050	;# 
+   723   000FD3                     OSCCON          equ	4051	;# 
+   724   000FD5                     T0CON           equ	4053	;# 
+   725   000FD6                     TMR0            equ	4054	;# 
+   726   000FD6                     TMR0L           equ	4054	;# 
+   727   000FD7                     TMR0H           equ	4055	;# 
+   728   000FD8                     STATUS          equ	4056	;# 
+   729   000FD9                     FSR2            equ	4057	;# 
+   730   000FD9                     FSR2L           equ	4057	;# 
+   731   000FDA                     FSR2H           equ	4058	;# 
+   732   000FDB                     PLUSW2          equ	4059	;# 
+   733   000FDC                     PREINC2         equ	4060	;# 
+   734   000FDD                     POSTDEC2        equ	4061	;# 
+   735   000FDE                     POSTINC2        equ	4062	;# 
+   736   000FDF                     INDF2           equ	4063	;# 
+   737   000FE0                     BSR             equ	4064	;# 
+   738   000FE1                     FSR1            equ	4065	;# 
+   739   000FE1                     FSR1L           equ	4065	;# 
+   740   000FE2                     FSR1H           equ	4066	;# 
+   741   000FE3                     PLUSW1          equ	4067	;# 
+   742   000FE4                     PREINC1         equ	4068	;# 
+   743   000FE5                     POSTDEC1        equ	4069	;# 
+   744   000FE6                     POSTINC1        equ	4070	;# 
+   745   000FE7                     INDF1           equ	4071	;# 
+   746   000FE8                     WREG            equ	4072	;# 
+   747   000FE9                     FSR0            equ	4073	;# 
+   748   000FE9                     FSR0L           equ	4073	;# 
+   749   000FEA                     FSR0H           equ	4074	;# 
+   750   000FEB                     PLUSW0          equ	4075	;# 
+   751   000FEC                     PREINC0         equ	4076	;# 
+   752   000FED                     POSTDEC0        equ	4077	;# 
+   753   000FEE                     POSTINC0        equ	4078	;# 
+   754   000FEF                     INDF0           equ	4079	;# 
+   755   000FF0                     INTCON3         equ	4080	;# 
+   756   000FF1                     INTCON2         equ	4081	;# 
+   757   000FF2                     INTCON          equ	4082	;# 
+   758   000FF3                     PROD            equ	4083	;# 
+   759   000FF3                     PRODL           equ	4083	;# 
+   760   000FF4                     PRODH           equ	4084	;# 
+   761   000FF5                     TABLAT          equ	4085	;# 
+   762   000FF6                     TBLPTR          equ	4086	;# 
+   763   000FF6                     TBLPTRL         equ	4086	;# 
+   764   000FF7                     TBLPTRH         equ	4087	;# 
+   765   000FF8                     TBLPTRU         equ	4088	;# 
+   766   000FF9                     PCLAT           equ	4089	;# 
+   767   000FF9                     PC              equ	4089	;# 
+   768   000FF9                     PCL             equ	4089	;# 
+   769   000FFA                     PCLATH          equ	4090	;# 
+   770   000FFB                     PCLATU          equ	4091	;# 
+   771   000FFC                     STKPTR          equ	4092	;# 
+   772   000FFD                     TOS             equ	4093	;# 
+   773   000FFD                     TOSL            equ	4093	;# 
+   774   000FFE                     TOSH            equ	4094	;# 
+   775   000FFF                     TOSU            equ	4095	;# 
+   776   000F62                     SPPDATA         equ	3938	;# 
+   777   000F63                     SPPCFG          equ	3939	;# 
+   778   000F64                     SPPEPS          equ	3940	;# 
+   779   000F65                     SPPCON          equ	3941	;# 
+   780   000F66                     UFRM            equ	3942	;# 
+   781   000F66                     UFRML           equ	3942	;# 
+   782   000F67                     UFRMH           equ	3943	;# 
+   783   000F68                     UIR             equ	3944	;# 
+   784   000F69                     UIE             equ	3945	;# 
+   785   000F6A                     UEIR            equ	3946	;# 
+   786   000F6B                     UEIE            equ	3947	;# 
+   787   000F6C                     USTAT           equ	3948	;# 
+   788   000F6D                     UCON            equ	3949	;# 
+   789   000F6E                     UADDR           equ	3950	;# 
+   790   000F6F                     UCFG            equ	3951	;# 
+   791   000F70                     UEP0            equ	3952	;# 
+   792   000F71                     UEP1            equ	3953	;# 
+   793   000F72                     UEP2            equ	3954	;# 
+   794   000F73                     UEP3            equ	3955	;# 
+   795   000F74                     UEP4            equ	3956	;# 
+   796   000F75                     UEP5            equ	3957	;# 
+   797   000F76                     UEP6            equ	3958	;# 
+   798   000F77                     UEP7            equ	3959	;# 
+   799   000F78                     UEP8            equ	3960	;# 
+   800   000F79                     UEP9            equ	3961	;# 
+   801   000F7A                     UEP10           equ	3962	;# 
+   802   000F7B                     UEP11           equ	3963	;# 
+   803   000F7C                     UEP12           equ	3964	;# 
+   804   000F7D                     UEP13           equ	3965	;# 
+   805   000F7E                     UEP14           equ	3966	;# 
+   806   000F7F                     UEP15           equ	3967	;# 
+   807   000F80                     PORTA           equ	3968	;# 
+   808   000F81                     PORTB           equ	3969	;# 
+   809   000F82                     PORTC           equ	3970	;# 
+   810   000F83                     PORTD           equ	3971	;# 
+   811   000F84                     PORTE           equ	3972	;# 
+   812   000F89                     LATA            equ	3977	;# 
+   813   000F8A                     LATB            equ	3978	;# 
+   814   000F8B                     LATC            equ	3979	;# 
+   815   000F8C                     LATD            equ	3980	;# 
+   816   000F8D                     LATE            equ	3981	;# 
+   817   000F92                     TRISA           equ	3986	;# 
+   818   000F92                     DDRA            equ	3986	;# 
+   819   000F93                     TRISB           equ	3987	;# 
+   820   000F93                     DDRB            equ	3987	;# 
+   821   000F94                     TRISC           equ	3988	;# 
+   822   000F94                     DDRC            equ	3988	;# 
+   823   000F95                     TRISD           equ	3989	;# 
+   824   000F95                     DDRD            equ	3989	;# 
+   825   000F96                     TRISE           equ	3990	;# 
+   826   000F96                     DDRE            equ	3990	;# 
+   827   000F9B                     OSCTUNE         equ	3995	;# 
+   828   000F9D                     PIE1            equ	3997	;# 
+   829   000F9E                     PIR1            equ	3998	;# 
+   830   000F9F                     IPR1            equ	3999	;# 
+   831   000FA0                     PIE2            equ	4000	;# 
+   832   000FA1                     PIR2            equ	4001	;# 
+   833   000FA2                     IPR2            equ	4002	;# 
+   834   000FA6                     EECON1          equ	4006	;# 
+   835   000FA7                     EECON2          equ	4007	;# 
+   836   000FA8                     EEDATA          equ	4008	;# 
+   837   000FA9                     EEADR           equ	4009	;# 
+   838   000FAB                     RCSTA           equ	4011	;# 
+   839   000FAB                     RCSTA1          equ	4011	;# 
+   840   000FAC                     TXSTA           equ	4012	;# 
+   841   000FAC                     TXSTA1          equ	4012	;# 
+   842   000FAD                     TXREG           equ	4013	;# 
+   843   000FAD                     TXREG1          equ	4013	;# 
+   844   000FAE                     RCREG           equ	4014	;# 
+   845   000FAE                     RCREG1          equ	4014	;# 
+   846   000FAF                     SPBRG           equ	4015	;# 
+   847   000FAF                     SPBRG1          equ	4015	;# 
+   848   000FB0                     SPBRGH          equ	4016	;# 
+   849   000FB1                     T3CON           equ	4017	;# 
+   850   000FB2                     TMR3            equ	4018	;# 
+   851   000FB2                     TMR3L           equ	4018	;# 
+   852   000FB3                     TMR3H           equ	4019	;# 
+   853   000FB4                     CMCON           equ	4020	;# 
+   854   000FB5                     CVRCON          equ	4021	;# 
+   855   000FB6                     ECCP1AS         equ	4022	;# 
+   856   000FB6                     CCP1AS          equ	4022	;# 
+   857   000FB7                     ECCP1DEL        equ	4023	;# 
+   858   000FB7                     CCP1DEL         equ	4023	;# 
+   859   000FB8                     BAUDCON         equ	4024	;# 
+   860   000FB8                     BAUDCTL         equ	4024	;# 
+   861   000FBA                     CCP2CON         equ	4026	;# 
+   862   000FBB                     CCPR2           equ	4027	;# 
+   863   000FBB                     CCPR2L          equ	4027	;# 
+   864   000FBC                     CCPR2H          equ	4028	;# 
+   865   000FBD                     CCP1CON         equ	4029	;# 
+   866   000FBD                     ECCP1CON        equ	4029	;# 
+   867   000FBE                     CCPR1           equ	4030	;# 
+   868   000FBE                     CCPR1L          equ	4030	;# 
+   869   000FBF                     CCPR1H          equ	4031	;# 
+   870   000FC0                     ADCON2          equ	4032	;# 
+   871   000FC1                     ADCON1          equ	4033	;# 
+   872   000FC2                     ADCON0          equ	4034	;# 
+   873   000FC3                     ADRES           equ	4035	;# 
+   874   000FC3                     ADRESL          equ	4035	;# 
+   875   000FC4                     ADRESH          equ	4036	;# 
+   876   000FC5                     SSPCON2         equ	4037	;# 
+   877   000FC6                     SSPCON1         equ	4038	;# 
+   878   000FC7                     SSPSTAT         equ	4039	;# 
+   879   000FC8                     SSPADD          equ	4040	;# 
+   880   000FC9                     SSPBUF          equ	4041	;# 
+   881   000FCA                     T2CON           equ	4042	;# 
+   882   000FCB                     PR2             equ	4043	;# 
+   883   000FCB                     MEMCON          equ	4043	;# 
+   884   000FCC                     TMR2            equ	4044	;# 
+   885   000FCD                     T1CON           equ	4045	;# 
+   886   000FCE                     TMR1            equ	4046	;# 
+   887   000FCE                     TMR1L           equ	4046	;# 
+   888   000FCF                     TMR1H           equ	4047	;# 
+   889   000FD0                     RCON            equ	4048	;# 
+   890   000FD1                     WDTCON          equ	4049	;# 
+   891   000FD2                     HLVDCON         equ	4050	;# 
+   892   000FD2                     LVDCON          equ	4050	;# 
+   893   000FD3                     OSCCON          equ	4051	;# 
+   894   000FD5                     T0CON           equ	4053	;# 
+   895   000FD6                     TMR0            equ	4054	;# 
+   896   000FD6                     TMR0L           equ	4054	;# 
+   897   000FD7                     TMR0H           equ	4055	;# 
+   898   000FD8                     STATUS          equ	4056	;# 
+   899   000FD9                     FSR2            equ	4057	;# 
+   900   000FD9                     FSR2L           equ	4057	;# 
+   901   000FDA                     FSR2H           equ	4058	;# 
+   902   000FDB                     PLUSW2          equ	4059	;# 
+   903   000FDC                     PREINC2         equ	4060	;# 
+   904   000FDD                     POSTDEC2        equ	4061	;# 
+   905   000FDE                     POSTINC2        equ	4062	;# 
+   906   000FDF                     INDF2           equ	4063	;# 
+   907   000FE0                     BSR             equ	4064	;# 
+   908   000FE1                     FSR1            equ	4065	;# 
+   909   000FE1                     FSR1L           equ	4065	;# 
+   910   000FE2                     FSR1H           equ	4066	;# 
+   911   000FE3                     PLUSW1          equ	4067	;# 
+   912   000FE4                     PREINC1         equ	4068	;# 
+   913   000FE5                     POSTDEC1        equ	4069	;# 
+   914   000FE6                     POSTINC1        equ	4070	;# 
+   915   000FE7                     INDF1           equ	4071	;# 
+   916   000FE8                     WREG            equ	4072	;# 
+   917   000FE9                     FSR0            equ	4073	;# 
+   918   000FE9                     FSR0L           equ	4073	;# 
+   919   000FEA                     FSR0H           equ	4074	;# 
+   920   000FEB                     PLUSW0          equ	4075	;# 
+   921   000FEC                     PREINC0         equ	4076	;# 
+   922   000FED                     POSTDEC0        equ	4077	;# 
+   923   000FEE                     POSTINC0        equ	4078	;# 
+   924   000FEF                     INDF0           equ	4079	;# 
+   925   000FF0                     INTCON3         equ	4080	;# 
+   926   000FF1                     INTCON2         equ	4081	;# 
+   927   000FF2                     INTCON          equ	4082	;# 
+   928   000FF3                     PROD            equ	4083	;# 
+   929   000FF3                     PRODL           equ	4083	;# 
+   930   000FF4                     PRODH           equ	4084	;# 
+   931   000FF5                     TABLAT          equ	4085	;# 
+   932   000FF6                     TBLPTR          equ	4086	;# 
+   933   000FF6                     TBLPTRL         equ	4086	;# 
+   934   000FF7                     TBLPTRH         equ	4087	;# 
+   935   000FF8                     TBLPTRU         equ	4088	;# 
+   936   000FF9                     PCLAT           equ	4089	;# 
+   937   000FF9                     PC              equ	4089	;# 
+   938   000FF9                     PCL             equ	4089	;# 
+   939   000FFA                     PCLATH          equ	4090	;# 
+   940   000FFB                     PCLATU          equ	4091	;# 
+   941   000FFC                     STKPTR          equ	4092	;# 
+   942   000FFD                     TOS             equ	4093	;# 
+   943   000FFD                     TOSL            equ	4093	;# 
+   944   000FFE                     TOSH            equ	4094	;# 
+   945   000FFF                     TOSU            equ	4095	;# 
+   946                           
+   947                           	psect	idataCOMRAM
+   948   0009A6                     __pidataCOMRAM:
+   949                           	callstack 0
+   950                           
+   951                           ;initializer for _password
+   952   0009A6  31                 	db	49
+   953   0009A7  32                 	db	50
+   954   0009A8  33                 	db	51
+   955   0009A9  34                 	db	52
+   956   0009AA  00                 	db	0
+   957                           
+   958                           	psect	smallconst
+   959   000800                     __psmallconst:
+   960                           	callstack 0
+   961   000800  00                 	db	0
+   962   000801                     keypad_getkey@F3226:
+   963                           	callstack 0
+   964   000801  31                 	db	49
+   965   000802  32                 	db	50
+   966   000803  33                 	db	51
+   967   000804  34                 	db	52
+   968   000805  35                 	db	53
+   969   000806  36                 	db	54
+   970   000807  37                 	db	55
+   971   000808  38                 	db	56
+   972   000809  39                 	db	57
+   973   00080A  2A                 	db	42
+   974   00080B  30                 	db	48
+   975   00080C  23                 	db	35
+   976   00080D                     __end_ofkeypad_getkey@F3226:
+   977                           	callstack 0
+   978   007D61                     _TRMT           set	32097
+   979   007CF5                     _RCIF           set	31989
+   980   007D59                     _OERR           set	32089
+   981   007D65                     _TXEN           set	32101
+   982   007D5C                     _CREN           set	32092
+   983   007D5F                     _SPEN           set	32095
+   984   007D64                     _SYNC           set	32100
+   985   007D62                     _BRGH           set	32098
+   986   000FAD                     _TXREG          set	4013
+   987   000FAE                     _RCREG          set	4014
+   988   000FAF                     _SPBRG          set	4015
+   989   000F81                     _PORTBbits      set	3969
+   990   000FF1                     _INTCON2bits    set	4081
+   991   000F8D                     _LATEbits       set	3981
+   992   000F93                     _TRISBbits      set	3987
+   993   000F96                     _TRISEbits      set	3990
+   994   000F8C                     _LATD           set	3980
+   995   000F8B                     _LATCbits       set	3979
+   996   000F94                     _TRISCbits      set	3988
+   997   000F95                     _TRISD          set	3989
+   998   00080D                     STR_1:
+   999   00080D  20                 	db	32
+  1000   00080E  20                 	db	32
+  1001   00080F  20                 	db	32
+  1002   000810  20                 	db	32
+  1003   000811  20                 	db	32
+  1004   000812  20                 	db	32
+  1005   000813  20                 	db	32
+  1006   000814  20                 	db	32
+  1007   000815  20                 	db	32
+  1008   000816  20                 	db	32
+  1009   000817  20                 	db	32
+  1010   000818  20                 	db	32
+  1011   000819  20                 	db	32
+  1012   00081A  20                 	db	32
+  1013   00081B  20                 	db	32
+  1014   00081C  20                 	db	32
+  1015   00081D  00                 	db	0
+  1016   00081E  41                 	db	65	;'A'
+  1017   00081F  63                 	db	99	;'c'
+  1018   000820  63                 	db	99	;'c'
+  1019   000821  65                 	db	101	;'e'
+  1020   000822  73                 	db	115	;'s'
+  1021   000823  73                 	db	115	;'s'
+  1022   000824  20                 	db	32
+  1023   000825  47                 	db	71	;'G'
+  1024   000826  72                 	db	114	;'r'
+  1025   000827  61                 	db	97	;'a'
+  1026   000828  6E                 	db	110	;'n'
+  1027   000829  74                 	db	116	;'t'
+  1028   00082A  65                 	db	101	;'e'
+  1029   00082B  64                 	db	100	;'d'
+  1030   00082C  00                 	db	0
+  1031   00082D  41                 	db	65	;'A'
+  1032   00082E  63                 	db	99	;'c'
+  1033   00082F  63                 	db	99	;'c'
+  1034   000830  65                 	db	101	;'e'
+  1035   000831  73                 	db	115	;'s'
+  1036   000832  73                 	db	115	;'s'
+  1037   000833  20                 	db	32
+  1038   000834  64                 	db	100	;'d'
+  1039   000835  65                 	db	101	;'e'
+  1040   000836  6E                 	db	110	;'n'
+  1041   000837  69                 	db	105	;'i'
+  1042   000838  65                 	db	101	;'e'
+  1043   000839  64                 	db	100	;'d'
+  1044   00083A  00                 	db	0
+  1045   00080D                     STR_4           equ	STR_1
+  1046   00083B  00                 	db	0	; dummy byte at the end
+  1047   000002                     __activetblptr  equ	2
+  1048                           
+  1049                           ; #config settings
+  1050                           
+  1051                           	psect	cinit
+  1052   0008E0                     __pcinit:
+  1053                           	callstack 0
+  1054   0008E0                     start_initialization:
+  1055                           	callstack 0
+  1056   0008E0                     __initialization:
+  1057                           	callstack 0
+  1058                           
+  1059                           ; Initialize objects allocated to COMRAM (5 bytes)
+  1060                           ; load TBLPTR registers with __pidataCOMRAM
+  1061   0008E0  0EA6               	movlw	low __pidataCOMRAM
+  1062   0008E2  6EF6               	movwf	tblptrl,c
+  1063   0008E4  0E09               	movlw	high __pidataCOMRAM
+  1064   0008E6  6EF7               	movwf	tblptrh,c
+  1065   0008E8  0E00               	movlw	low (__pidataCOMRAM shr (0+16))
+  1066   0008EA  6EF8               	movwf	tblptru,c
+  1067   0008EC  EE00  F019         	lfsr	0,__pdataCOMRAM
+  1068   0008F0  EE10 F005          	lfsr	1,5
+  1069   0008F4                     copy_data0:
+  1070   0008F4  0009               	tblrd		*+
+  1071   0008F6  CFF5 FFEE          	movff	tablat,postinc0
+  1072   0008FA  50E5               	movf	postdec1,w,c
+  1073   0008FC  50E1               	movf	fsr1l,w,c
+  1074   0008FE  E1FA               	bnz	copy_data0
+  1075                           
+  1076                           ; Clear objects allocated to COMRAM (8 bytes)
+  1077   000900  EE00  F011         	lfsr	0,__pbssCOMRAM
+  1078   000904  0E08               	movlw	8
+  1079   000906                     clear_0:
+  1080   000906  6AEE               	clrf	postinc0,c
+  1081   000908  06E8               	decf	wreg,f,c
+  1082   00090A  E1FD               	bnz	clear_0
+  1083   00090C                     end_of_initialization:
+  1084                           	callstack 0
+  1085   00090C                     __end_of__initialization:
+  1086                           	callstack 0
+  1087   00090C  0E00               	movlw	low (__Lmediumconst shr (0+16))
+  1088   00090E  6EF8               	movwf	tblptru,c
+  1089   000910  0100               	movlb	0
+  1090   000912  EF8B  F004         	goto	_main	;jump to C main() function
+  1091                           
+  1092                           	psect	bssCOMRAM
+  1093   000011                     __pbssCOMRAM:
+  1094                           	callstack 0
+  1095   000011                     keypad_password@position:
+  1096                           	callstack 0
+  1097   000011                     	ds	1
+  1098   000012                     _index:
+  1099                           	callstack 0
+  1100   000012                     	ds	1
+  1101   000013                     keypad@position:
+  1102                           	callstack 0
+  1103   000013                     	ds	1
+  1104   000014                     _entered:
+  1105                           	callstack 0
+  1106   000014                     	ds	5
+  1107                           
+  1108                           	psect	dataCOMRAM
+  1109   000019                     __pdataCOMRAM:
+  1110                           	callstack 0
+  1111   000019                     _password:
+  1112                           	callstack 0
+  1113   000019                     	ds	5
+  1114                           
+  1115                           	psect	cstackCOMRAM
+  1116   000001                     __pcstackCOMRAM:
+  1117                           	callstack 0
+  1118   000001                     lcd_data@data:
+  1119                           	callstack 0
+  1120   000001                     uart_receive_str@buffer:
+  1121                           	callstack 0
+  1122   000001                     ??_lcd_cmd:
+  1123   000001                     
+  1124                           ; 1 bytes @ 0x0
+  1125   000001                     	ds	1
+  1126   000002                     lcd_cmd@cmd:
+  1127                           	callstack 0
+  1128   000002                     lcd_str@str:
+  1129                           	callstack 0
+  1130   000002                     uart_receive_str@i:
+  1131                           	callstack 0
+  1132   000002                     
+  1133                           ; 1 bytes @ 0x1
+  1134   000002                     	ds	1
+  1135   000003                     
+  1136                           ; 1 bytes @ 0x2
+  1137   000003                     	ds	1
+  1138   000004                     uart_receive_str@ch:
+  1139                           	callstack 0
+  1140   000004                     
+  1141                           ; 1 bytes @ 0x3
+  1142   000004                     	ds	1
+  1143   000005                     main@time_buffer:
+  1144                           	callstack 0
+  1145   000005                     
+  1146                           ; 1 bytes @ 0x4
+  1147   000005                     	ds	12
+  1148                           
+  1149 ;;
+  1150 ;;Main: autosize = 0, tempsize = 0, incstack = 0, save=0
+  1151 ;;
+  1152 ;; *************** function _main *****************
+  1153 ;; Defined at:
+  1154 ;;		line 7 in file "main.c"
+  1155 ;; Parameters:    Size  Location     Type
+  1156 ;;		None
+  1157 ;; Auto vars:     Size  Location     Type
+  1158 ;;  time_buffer    12    4[COMRAM] unsigned char [12]
+  1159 ;; Return value:  Size  Location     Type
+  1160 ;;                  1    wreg      void 
+  1161 ;; Registers used:
+  1162 ;;		wreg, fsr0l, fsr0h, fsr2l, fsr2h, status,2, status,0, tblptrl, tblptrh, tblptru, cstack
+  1163 ;; Tracked objects:
+  1164 ;;		On entry : 0/0
+  1165 ;;		On exit  : 0/0
+  1166 ;;		Unchanged: 0/0
+  1167 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+  1168 ;;      Params:         0       0       0       0       0       0       0       0       0
+  1169 ;;      Locals:        12       0       0       0       0       0       0       0       0
+  1170 ;;      Temps:          0       0       0       0       0       0       0       0       0
+  1171 ;;      Totals:        12       0       0       0       0       0       0       0       0
+  1172 ;;Total ram usage:       12 bytes
+  1173 ;; Hardware stack levels required when called: 2
+  1174 ;; This function calls:
+  1175 ;;		_lcd_cmd
+  1176 ;;		_lcd_init
+  1177 ;;		_lcd_str
+  1178 ;;		_uart_init
+  1179 ;;		_uart_receive_str
+  1180 ;; This function is called by:
+  1181 ;;		Startup code after reset
+  1182 ;; This function uses a non-reentrant model
+  1183 ;;
+  1184                           
+  1185                           	psect	text0
+  1186   000916                     __ptext0:
+  1187                           	callstack 0
+  1188   000916                     _main:
+  1189                           	callstack 29
+  1190   000916                     
+  1191                           ;main.c: 8:     char time_buffer[12];;main.c: 9:     uart_init();
+  1192   000916  ECC4  F004         	call	_uart_init	;wreg free
+  1193                           
+  1194                           ;main.c: 10:     lcd_init();
+  1195   00091A  ECA2  F004         	call	_lcd_init	;wreg free
+  1196                           
+  1197                           ;main.c: 11:     lcd_cmd(0x80);
+  1198   00091E  0E80               	movlw	128
+  1199   000920  ECB5  F004         	call	_lcd_cmd
+  1200   000924                     l1055:
+  1201                           
+  1202                           ;main.c: 13:         uart_receive_str(time_buffer);
+  1203   000924  0E05               	movlw	low main@time_buffer
+  1204   000926  6E01               	movwf	uart_receive_str@buffer^0,c
+  1205   000928  EC4D  F004         	call	_uart_receive_str	;wreg free
+  1206   00092C                     
+  1207                           ;main.c: 15:         lcd_str(time_buffer);
+  1208   00092C  0E05               	movlw	low main@time_buffer
+  1209   00092E  6E02               	movwf	lcd_str@str^0,c
+  1210   000930  6A03               	clrf	(lcd_str@str+1)^0,c
+  1211   000932  EC1E  F004         	call	_lcd_str	;wreg free
+  1212   000936                     
+  1213                           ;main.c: 16:         lcd_cmd(0x80);
+  1214   000936  0E80               	movlw	128
+  1215   000938  ECB5  F004         	call	_lcd_cmd
+  1216   00093C  EF92  F004         	goto	l1055
+  1217   000940  EF00  F000         	goto	start
+  1218   000944                     __end_of_main:
+  1219                           	callstack 0
+  1220                           
+  1221 ;; *************** function _uart_receive_str *****************
+  1222 ;; Defined at:
+  1223 ;;		line 34 in file "uart.c"
+  1224 ;; Parameters:    Size  Location     Type
+  1225 ;;  buffer          1    0[COMRAM] PTR unsigned char 
+  1226 ;;		 -> main@time_buffer(12), 
+  1227 ;; Auto vars:     Size  Location     Type
+  1228 ;;  i               2    1[COMRAM] int 
+  1229 ;;  ch              1    3[COMRAM] unsigned char 
+  1230 ;; Return value:  Size  Location     Type
+  1231 ;;                  1    wreg      void 
+  1232 ;; Registers used:
+  1233 ;;		wreg, fsr2l, fsr2h, status,2, status,0
+  1234 ;; Tracked objects:
+  1235 ;;		On entry : 0/0
+  1236 ;;		On exit  : 0/0
+  1237 ;;		Unchanged: 0/0
+  1238 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+  1239 ;;      Params:         1       0       0       0       0       0       0       0       0
+  1240 ;;      Locals:         3       0       0       0       0       0       0       0       0
+  1241 ;;      Temps:          0       0       0       0       0       0       0       0       0
+  1242 ;;      Totals:         4       0       0       0       0       0       0       0       0
+  1243 ;;Total ram usage:        4 bytes
+  1244 ;; Hardware stack levels used: 1
+  1245 ;; This function calls:
+  1246 ;;		Nothing
+  1247 ;; This function is called by:
+  1248 ;;		_main
+  1249 ;; This function uses a non-reentrant model
+  1250 ;;
+  1251                           
+  1252                           	psect	text1
+  1253   00089A                     __ptext1:
+  1254                           	callstack 0
+  1255   00089A                     _uart_receive_str:
+  1256                           	callstack 30
+  1257   00089A                     
+  1258                           ;uart.c: 34: void uart_receive_str(char *buffer);uart.c: 35: {;uart.c: 36:     char ch;;
+      +                          uart.c: 37:     int i = 0;
+  1259   00089A  0E00               	movlw	0
+  1260   00089C  6E03               	movwf	(uart_receive_str@i+1)^0,c
+  1261   00089E  0E00               	movlw	0
+  1262   0008A0  6E02               	movwf	uart_receive_str@i^0,c
+  1263   0008A2                     l136:
+  1264                           
+  1265                           ;uart.c: 40:         while (!RCIF)
+  1266   0008A2  AA9E               	btfss	3998,5,c	;volatile
+  1267   0008A4  EF56  F004         	goto	u321
+  1268   0008A8  EF58  F004         	goto	u320
+  1269   0008AC                     u321:
+  1270   0008AC  EF51  F004         	goto	l136
+  1271   0008B0                     u320:
+  1272   0008B0                     
+  1273                           ;uart.c: 42:         ch = RCREG;
+  1274   0008B0  CFAE F004          	movff	4014,uart_receive_str@ch	;volatile
+  1275   0008B4                     
+  1276                           ;uart.c: 44:         if (ch == '\n')
+  1277   0008B4  0E0A               	movlw	10
+  1278   0008B6  1804               	xorwf	uart_receive_str@ch^0,w,c
+  1279   0008B8  A4D8               	btfss	status,2,c
+  1280   0008BA  EF61  F004         	goto	u331
+  1281   0008BE  EF63  F004         	goto	u330
+  1282   0008C2                     u331:
+  1283   0008C2  EF65  F004         	goto	l1041
+  1284   0008C6                     u330:
+  1285   0008C6  EF6F  F004         	goto	l142
+  1286   0008CA                     l1041:
+  1287                           
+  1288                           ;uart.c: 48:         buffer[i++] = ch;
+  1289   0008CA  5001               	movf	uart_receive_str@buffer^0,w,c
+  1290   0008CC  2402               	addwf	uart_receive_str@i^0,w,c
+  1291   0008CE  6ED9               	movwf	fsr2l,c
+  1292   0008D0  6ADA               	clrf	fsr2h,c
+  1293   0008D2  C004  FFDF         	movff	uart_receive_str@ch,indf2
+  1294   0008D6  4A02               	infsnz	uart_receive_str@i^0,f,c
+  1295   0008D8  2A03               	incf	(uart_receive_str@i+1)^0,f,c
+  1296   0008DA  EF51  F004         	goto	l136
+  1297   0008DE                     l142:
+  1298   0008DE  0012               	return		;funcret
+  1299   0008E0                     __end_of_uart_receive_str:
+  1300                           	callstack 0
+  1301                           
+  1302 ;; *************** function _uart_init *****************
+  1303 ;; Defined at:
+  1304 ;;		line 5 in file "uart.c"
+  1305 ;; Parameters:    Size  Location     Type
+  1306 ;;		None
+  1307 ;; Auto vars:     Size  Location     Type
+  1308 ;;		None
+  1309 ;; Return value:  Size  Location     Type
+  1310 ;;                  1    wreg      void 
+  1311 ;; Registers used:
+  1312 ;;		wreg, status,2
+  1313 ;; Tracked objects:
+  1314 ;;		On entry : 0/0
+  1315 ;;		On exit  : 0/0
+  1316 ;;		Unchanged: 0/0
+  1317 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+  1318 ;;      Params:         0       0       0       0       0       0       0       0       0
+  1319 ;;      Locals:         0       0       0       0       0       0       0       0       0
+  1320 ;;      Temps:          0       0       0       0       0       0       0       0       0
+  1321 ;;      Totals:         0       0       0       0       0       0       0       0       0
+  1322 ;;Total ram usage:        0 bytes
+  1323 ;; Hardware stack levels used: 1
+  1324 ;; This function calls:
+  1325 ;;		Nothing
+  1326 ;; This function is called by:
+  1327 ;;		_main
+  1328 ;; This function uses a non-reentrant model
+  1329 ;;
+  1330                           
+  1331                           	psect	text2
+  1332   000988                     __ptext2:
+  1333                           	callstack 0
+  1334   000988                     _uart_init:
+  1335                           	callstack 30
+  1336   000988                     
+  1337                           ;uart.c: 7:     SPBRG = 77;
+  1338   000988  0E4D               	movlw	77
+  1339   00098A  6EAF               	movwf	175,c	;volatile
+  1340   00098C                     
+  1341                           ;uart.c: 8:     BRGH = 1;
+  1342   00098C  84AC               	bsf	4012,2,c	;volatile
+  1343   00098E                     
+  1344                           ;uart.c: 9:     SYNC = 0;
+  1345   00098E  98AC               	bcf	4012,4,c	;volatile
+  1346   000990                     
+  1347                           ;uart.c: 10:     SPEN = 1;
+  1348   000990  8EAB               	bsf	4011,7,c	;volatile
+  1349   000992                     
+  1350                           ;uart.c: 11:     CREN = 1;
+  1351   000992  88AB               	bsf	4011,4,c	;volatile
+  1352   000994                     
+  1353                           ;uart.c: 12:     TXEN = 1;
+  1354   000994  8AAC               	bsf	4012,5,c	;volatile
+  1355   000996  0012               	return		;funcret
+  1356   000998                     __end_of_uart_init:
+  1357                           	callstack 0
+  1358                           
+  1359 ;; *************** function _lcd_str *****************
+  1360 ;; Defined at:
+  1361 ;;		line 36 in file "lcd.c"
+  1362 ;; Parameters:    Size  Location     Type
+  1363 ;;  str             2    1[COMRAM] PTR unsigned char 
+  1364 ;;		 -> STR_4(17), STR_3(14), STR_2(15), STR_1(17), 
+  1365 ;;		 -> main@time_buffer(12), 
+  1366 ;; Auto vars:     Size  Location     Type
+  1367 ;;		None
+  1368 ;; Return value:  Size  Location     Type
+  1369 ;;                  1    wreg      void 
+  1370 ;; Registers used:
+  1371 ;;		wreg, fsr0l, fsr0h, status,2, status,0, tblptrl, tblptrh, tblptru, cstack
+  1372 ;; Tracked objects:
+  1373 ;;		On entry : 0/0
+  1374 ;;		On exit  : 0/0
+  1375 ;;		Unchanged: 0/0
+  1376 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+  1377 ;;      Params:         2       0       0       0       0       0       0       0       0
+  1378 ;;      Locals:         0       0       0       0       0       0       0       0       0
+  1379 ;;      Temps:          0       0       0       0       0       0       0       0       0
+  1380 ;;      Totals:         2       0       0       0       0       0       0       0       0
+  1381 ;;Total ram usage:        2 bytes
+  1382 ;; Hardware stack levels used: 1
+  1383 ;; Hardware stack levels required when called: 1
+  1384 ;; This function calls:
+  1385 ;;		_lcd_data
+  1386 ;; This function is called by:
+  1387 ;;		_main
+  1388 ;;		_keypad_password
+  1389 ;; This function uses a non-reentrant model
+  1390 ;;
+  1391                           
+  1392                           	psect	text3
+  1393   00083C                     __ptext3:
+  1394                           	callstack 0
+  1395   00083C                     _lcd_str:
+  1396                           	callstack 29
+  1397   00083C                     
+  1398                           ;lcd.c: 37:     while (*str) {
+  1399   00083C  EF34  F004         	goto	l1051
+  1400   000840                     l1047:
+  1401                           
+  1402                           ;lcd.c: 38:         lcd_data(*str++);
+  1403   000840  C002  FFF6         	movff	lcd_str@str,tblptrl
+  1404   000844  C003  FFF7         	movff	lcd_str@str+1,tblptrh
+  1405   000848  6AF8               	clrf	tblptru,c
+  1406   00084A  0E07               	movlw	(high __ramtop+-1)
+  1407   00084C  64F7               	cpfsgt	tblptrh,c
+  1408   00084E  D003               	bra	u347
+  1409   000850  0008               	tblrd		*
+  1410   000852  50F5               	movf	tablat,w,c
+  1411   000854  D005               	bra	u340
+  1412   000856                     u347:
+  1413   000856  CFF6 FFE9          	movff	tblptrl,fsr0l
+  1414   00085A  CFF7 FFEA          	movff	tblptrh,fsr0h
+  1415   00085E  50EF               	movf	indf0,w,c
+  1416   000860                     u340:
+  1417   000860  ECCC  F004         	call	_lcd_data
+  1418   000864  4A02               	infsnz	lcd_str@str^0,f,c
+  1419   000866  2A03               	incf	(lcd_str@str+1)^0,f,c
+  1420   000868                     l1051:
+  1421                           
+  1422                           ;lcd.c: 37:     while (*str) {
+  1423   000868  C002  FFF6         	movff	lcd_str@str,tblptrl
+  1424   00086C  C003  FFF7         	movff	lcd_str@str+1,tblptrh
+  1425   000870  6AF8               	clrf	tblptru,c
+  1426   000872  0E07               	movlw	(high __ramtop+-1)
+  1427   000874  64F7               	cpfsgt	tblptrh,c
+  1428   000876  D003               	bra	u357
+  1429   000878  0008               	tblrd		*
+  1430   00087A  50F5               	movf	tablat,w,c
+  1431   00087C  D005               	bra	u350
+  1432   00087E                     u357:
+  1433   00087E  CFF6 FFE9          	movff	tblptrl,fsr0l
+  1434   000882  CFF7 FFEA          	movff	tblptrh,fsr0h
+  1435   000886  50EF               	movf	indf0,w,c
+  1436   000888                     u350:
+  1437   000888  0900               	iorlw	0
+  1438   00088A  A4D8               	btfss	status,2,c
+  1439   00088C  EF4A  F004         	goto	u361
+  1440   000890  EF4C  F004         	goto	u360
+  1441   000894                     u361:
+  1442   000894  EF20  F004         	goto	l1047
+  1443   000898                     u360:
+  1444   000898  0012               	return		;funcret
+  1445   00089A                     __end_of_lcd_str:
+  1446                           	callstack 0
+  1447                           
+  1448 ;; *************** function _lcd_data *****************
+  1449 ;; Defined at:
+  1450 ;;		line 27 in file "lcd.c"
+  1451 ;; Parameters:    Size  Location     Type
+  1452 ;;  data            1    wreg     unsigned char 
+  1453 ;; Auto vars:     Size  Location     Type
+  1454 ;;  data            1    0[COMRAM] unsigned char 
+  1455 ;; Return value:  Size  Location     Type
+  1456 ;;                  1    wreg      void 
+  1457 ;; Registers used:
+  1458 ;;		wreg
+  1459 ;; Tracked objects:
+  1460 ;;		On entry : 0/0
+  1461 ;;		On exit  : 0/0
+  1462 ;;		Unchanged: 0/0
+  1463 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+  1464 ;;      Params:         0       0       0       0       0       0       0       0       0
+  1465 ;;      Locals:         1       0       0       0       0       0       0       0       0
+  1466 ;;      Temps:          0       0       0       0       0       0       0       0       0
+  1467 ;;      Totals:         1       0       0       0       0       0       0       0       0
+  1468 ;;Total ram usage:        1 bytes
+  1469 ;; Hardware stack levels used: 1
+  1470 ;; This function calls:
+  1471 ;;		Nothing
+  1472 ;; This function is called by:
+  1473 ;;		_lcd_str
+  1474 ;;		_keypad
+  1475 ;;		_keypad_password
+  1476 ;; This function uses a non-reentrant model
+  1477 ;;
+  1478                           
+  1479                           	psect	text4
+  1480   000998                     __ptext4:
+  1481                           	callstack 0
+  1482   000998                     _lcd_data:
+  1483                           	callstack 29
+  1484                           
+  1485                           ;incstack = 0
+  1486                           ;lcd_data@data stored from wreg
+  1487   000998  6E01               	movwf	lcd_data@data^0,c
+  1488   00099A                     
+  1489                           ;lcd.c: 28:     LATCbits.LATC0 = 1;
+  1490   00099A  808B               	bsf	139,0,c	;volatile
+  1491   00099C                     
+  1492                           ;lcd.c: 30:     LATD = data;
+  1493   00099C  C001  FF8C         	movff	lcd_data@data,3980	;volatile
+  1494   0009A0                     
+  1495                           ;lcd.c: 31:     LATCbits.LATC1 = 1;
+  1496   0009A0  828B               	bsf	139,1,c	;volatile
+  1497   0009A2                     
+  1498                           ;lcd.c: 33:     LATCbits.LATC1 = 0;
+  1499   0009A2  928B               	bcf	139,1,c	;volatile
+  1500   0009A4  0012               	return		;funcret
+  1501   0009A6                     __end_of_lcd_data:
+  1502                           	callstack 0
+  1503                           
+  1504 ;; *************** function _lcd_init *****************
+  1505 ;; Defined at:
+  1506 ;;		line 3 in file "lcd.c"
+  1507 ;; Parameters:    Size  Location     Type
+  1508 ;;		None
+  1509 ;; Auto vars:     Size  Location     Type
+  1510 ;;		None
+  1511 ;; Return value:  Size  Location     Type
+  1512 ;;                  1    wreg      void 
+  1513 ;; Registers used:
+  1514 ;;		wreg, status,2, cstack
+  1515 ;; Tracked objects:
+  1516 ;;		On entry : 0/0
+  1517 ;;		On exit  : 0/0
+  1518 ;;		Unchanged: 0/0
+  1519 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+  1520 ;;      Params:         0       0       0       0       0       0       0       0       0
+  1521 ;;      Locals:         0       0       0       0       0       0       0       0       0
+  1522 ;;      Temps:          0       0       0       0       0       0       0       0       0
+  1523 ;;      Totals:         0       0       0       0       0       0       0       0       0
+  1524 ;;Total ram usage:        0 bytes
+  1525 ;; Hardware stack levels used: 1
+  1526 ;; Hardware stack levels required when called: 1
+  1527 ;; This function calls:
+  1528 ;;		_lcd_cmd
+  1529 ;; This function is called by:
+  1530 ;;		_main
+  1531 ;; This function uses a non-reentrant model
+  1532 ;;
+  1533                           
+  1534                           	psect	text5
+  1535   000944                     __ptext5:
+  1536                           	callstack 0
+  1537   000944                     _lcd_init:
+  1538                           	callstack 29
+  1539   000944                     
+  1540                           ;lcd.c: 4:     TRISD = 0x00;
+  1541   000944  6A95               	clrf	149,c	;volatile
+  1542                           
+  1543                           ;lcd.c: 5:     TRISCbits.TRISC0 = 0;
+  1544   000946  9094               	bcf	148,0,c	;volatile
+  1545                           
+  1546                           ;lcd.c: 7:     TRISCbits.TRISC1 = 0;
+  1547   000948  9294               	bcf	148,1,c	;volatile
+  1548   00094A                     
+  1549                           ;lcd.c: 10:     lcd_cmd(0x38);
+  1550   00094A  0E38               	movlw	56
+  1551   00094C  ECB5  F004         	call	_lcd_cmd
+  1552                           
+  1553                           ;lcd.c: 11:     lcd_cmd(0x0C);
+  1554   000950  0E0C               	movlw	12
+  1555   000952  ECB5  F004         	call	_lcd_cmd
+  1556                           
+  1557                           ;lcd.c: 12:     lcd_cmd(0x01);
+  1558   000956  0E01               	movlw	1
+  1559   000958  ECB5  F004         	call	_lcd_cmd
+  1560                           
+  1561                           ;lcd.c: 14:     lcd_cmd(0x06);
+  1562   00095C  0E06               	movlw	6
+  1563   00095E  ECB5  F004         	call	_lcd_cmd
+  1564                           
+  1565                           ;lcd.c: 15:     lcd_cmd(0x80);
+  1566   000962  0E80               	movlw	128
+  1567   000964  ECB5  F004         	call	_lcd_cmd
+  1568   000968  0012               	return		;funcret
+  1569   00096A                     __end_of_lcd_init:
+  1570                           	callstack 0
+  1571                           
+  1572 ;; *************** function _lcd_cmd *****************
+  1573 ;; Defined at:
+  1574 ;;		line 18 in file "lcd.c"
+  1575 ;; Parameters:    Size  Location     Type
+  1576 ;;  cmd             1    wreg     unsigned char 
+  1577 ;; Auto vars:     Size  Location     Type
+  1578 ;;  cmd             1    1[COMRAM] unsigned char 
+  1579 ;; Return value:  Size  Location     Type
+  1580 ;;                  1    wreg      void 
+  1581 ;; Registers used:
+  1582 ;;		wreg, status,2, cstack
+  1583 ;; Tracked objects:
+  1584 ;;		On entry : 0/0
+  1585 ;;		On exit  : 0/0
+  1586 ;;		Unchanged: 0/0
+  1587 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+  1588 ;;      Params:         0       0       0       0       0       0       0       0       0
+  1589 ;;      Locals:         1       0       0       0       0       0       0       0       0
+  1590 ;;      Temps:          1       0       0       0       0       0       0       0       0
+  1591 ;;      Totals:         2       0       0       0       0       0       0       0       0
+  1592 ;;Total ram usage:        2 bytes
+  1593 ;; Hardware stack levels used: 1
+  1594 ;; This function calls:
+  1595 ;;		Nothing
+  1596 ;; This function is called by:
+  1597 ;;		_main
+  1598 ;;		_lcd_init
+  1599 ;;		_keypad
+  1600 ;;		_keypad_password
+  1601 ;; This function uses a non-reentrant model
+  1602 ;;
+  1603                           
+  1604                           	psect	text6
+  1605   00096A                     __ptext6:
+  1606                           	callstack 0
+  1607   00096A                     _lcd_cmd:
+  1608                           	callstack 29
+  1609                           
+  1610                           ;incstack = 0
+  1611                           ;lcd_cmd@cmd stored from wreg
+  1612   00096A  6E02               	movwf	lcd_cmd@cmd^0,c
+  1613   00096C                     
+  1614                           ;lcd.c: 19:     LATCbits.LATC0 = 0;
+  1615   00096C  908B               	bcf	139,0,c	;volatile
+  1616   00096E                     
+  1617                           ;lcd.c: 21:     LATD = cmd;
+  1618   00096E  C002  FF8C         	movff	lcd_cmd@cmd,3980	;volatile
+  1619   000972                     
+  1620                           ;lcd.c: 22:     LATCbits.LATC1 = 1;
+  1621   000972  828B               	bsf	139,1,c	;volatile
+  1622   000974                     
+  1623                           ;lcd.c: 23:     _delay((unsigned long)((1)*(20000000/4000.0)));
+  1624   000974  0E07               	movlw	7
+  1625   000976  6E01               	movwf	??_lcd_cmd^0,c
+  1626   000978  0E7D               	movlw	125
+  1627   00097A                     u427:
+  1628   00097A  2EE8               	decfsz	wreg,f,c
+  1629   00097C  D7FE               	bra	u427
+  1630   00097E  2E01               	decfsz	??_lcd_cmd^0,f,c
+  1631   000980  D7FC               	bra	u427
+  1632   000982  0000               	nop	
+  1633   000984                     
+  1634                           ;lcd.c: 24:     LATCbits.LATC1 = 0;
+  1635   000984  928B               	bcf	139,1,c	;volatile
+  1636   000986  0012               	return		;funcret
+  1637   000988                     __end_of_lcd_cmd:
+  1638                           	callstack 0
+  1639                           
+  1640                           	psect	rparam
+  1641   000001                     ___rparam_used  equ	1
+  1642   000000                     ___param_bank   equ	0
+  1643   000000                     __Lparam        equ	__Lrparam
+  1644   000000                     __Hparam        equ	__Hrparam
+  1645                           tosu	equ	0xFFF
+  1646                           tosh	equ	0xFFE
+  1647                           tosl	equ	0xFFD
+  1648                           stkptr	equ	0xFFC
+  1649                           pclatu	equ	0xFFB
+  1650                           pclath	equ	0xFFA
+  1651                           pcl	equ	0xFF9
+  1652                           tblptru	equ	0xFF8
+  1653                           tblptrh	equ	0xFF7
+  1654                           tblptrl	equ	0xFF6
+  1655                           tablat	equ	0xFF5
+  1656                           prodh	equ	0xFF4
+  1657                           prodl	equ	0xFF3
+  1658                           indf0	equ	0xFEF
+  1659                           postinc0	equ	0xFEE
+  1660                           postdec0	equ	0xFED
+  1661                           preinc0	equ	0xFEC
+  1662                           plusw0	equ	0xFEB
+  1663                           fsr0h	equ	0xFEA
+  1664                           fsr0l	equ	0xFE9
+  1665                           wreg	equ	0xFE8
+  1666                           indf1	equ	0xFE7
+  1667                           postinc1	equ	0xFE6
+  1668                           postdec1	equ	0xFE5
+  1669                           preinc1	equ	0xFE4
+  1670                           plusw1	equ	0xFE3
+  1671                           fsr1h	equ	0xFE2
+  1672                           fsr1l	equ	0xFE1
+  1673                           bsr	equ	0xFE0
+  1674                           indf2	equ	0xFDF
+  1675                           postinc2	equ	0xFDE
+  1676                           postdec2	equ	0xFDD
+  1677                           preinc2	equ	0xFDC
+  1678                           plusw2	equ	0xFDB
+  1679                           fsr2h	equ	0xFDA
+  1680                           fsr2l	equ	0xFD9
+  1681                           status	equ	0xFD8
+
+Data Sizes:
+    Strings     46
+    Constant    12
+    Data        5
+    BSS         8
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95     16      29
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+    BANK6           256      0       0
+    BANK7           256      0       0
+
+Pointer List with Targets:
+
+    lcd_str@str	PTR unsigned char  size(2) Largest target is 17
+		 -> main@time_buffer(COMRAM[12]), STR_1(CODE[17]), STR_2(CODE[15]), STR_3(CODE[14]), 
+		 -> STR_4(CODE[17]), 
+
+    uart_receive_str@buffer	PTR unsigned char  size(1) Largest target is 12
+		 -> main@time_buffer(COMRAM[12]), 
+
+
+Critical Paths under _main in COMRAM
+
+    _main->_uart_receive_str
+    _lcd_str->_lcd_data
+    _lcd_init->_lcd_cmd
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _main in BANK6
+
+    None.
+
+Critical Paths under _main in BANK7
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                12    12      0     235
+                                              4 COMRAM    12    12      0
+                            _lcd_cmd
+                           _lcd_init
+                            _lcd_str
+                          _uart_init
+                   _uart_receive_str
+ ---------------------------------------------------------------------------------
+ (1) _uart_receive_str                                     4     3      1      92
+                                              0 COMRAM     4     3      1
+ ---------------------------------------------------------------------------------
+ (1) _uart_init                                            0     0      0       0
+ ---------------------------------------------------------------------------------
+ (1) _lcd_str                                              2     0      2      65
+                                              1 COMRAM     2     0      2
+                           _lcd_data
+ ---------------------------------------------------------------------------------
+ (2) _lcd_data                                             1     1      0      15
+                                              0 COMRAM     1     1      0
+ ---------------------------------------------------------------------------------
+ (1) _lcd_init                                             0     0      0      15
+                            _lcd_cmd
+ ---------------------------------------------------------------------------------
+ (2) _lcd_cmd                                              2     2      0      15
+                                              0 COMRAM     2     2      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 2
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _lcd_cmd
+   _lcd_init
+     _lcd_cmd
+   _lcd_str
+     _lcd_data
+   _uart_init
+   _uart_receive_str
+
+Address spaces:
+Name               Size   Autos  Total    Usage
+BIGRAM            2047      0       0      0.0%
+BITBANK7           256      0       0      0.0%
+BANK7              256      0       0      0.0%
+BITBANK6           256      0       0      0.0%
+BANK6              256      0       0      0.0%
+BITBANK5           256      0       0      0.0%
+BANK5              256      0       0      0.0%
+BITBANK4           256      0       0      0.0%
+BANK4              256      0       0      0.0%
+BITBANK3           256      0       0      0.0%
+BANK3              256      0       0      0.0%
+BITBANK2           256      0       0      0.0%
+BANK2              256      0       0      0.0%
+BITBANK1           256      0       0      0.0%
+BANK1              256      0       0      0.0%
+BITBANK0           160      0       0      0.0%
+BANK0              160      0       0      0.0%
+BITCOMRAM           95      0       0      0.0%
+COMRAM              95     16      29     30.5%
+BITBIGSFRh          82      0       0      0.0%
+BITBIGSFRlh         43      0       0      0.0%
+BITBIGSFRll         33      0       0      0.0%
+STACK                0      0       0      0.0%
+DATA                 0      0      29      0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.50 build 20240725155939 
+Symbol Table                                                                                   Fri Jul 11 17:57:32 2025
+
+              lcd_data@data 0001                          l33 0968                          l36 0986  
+                        l45 0898                          l39 09A4                         l142 08DE  
+                       l119 0996                         l136 08A2                         l138 08B0  
+                       l861 0974                         l863 0984                         l855 096C  
+                       l871 09A2                         l857 096E                         l865 099A  
+                       l881 0992                         l873 0988                         l859 0972  
+                       l867 099C                         l883 0994                         l875 098C  
+                       l885 0944                         l869 09A0                         l877 098E  
+                       l887 094A                         l879 0990                         u320 08B0  
+                       u321 08AC                         u330 08C6                         u331 08C2  
+                       u340 0860                         u350 0888                         u360 0898  
+                       u361 0894                         u427 097A                         u347 0856  
+                       u357 087E                         wreg 0FE8                        l1041 08CA  
+                      l1051 0868                        l1043 08D6                        l1035 089A  
+                      l1045 083C                        l1037 08B4                        l1053 0916  
+                      l1047 0840                        l1055 0924                        l1049 0864  
+                      l1057 092C                        l1059 0936                        STR_1 080D  
+                      STR_2 081E                        STR_3 082D                        _BRGH 7D62  
+                      _CREN 7D5C                        _LATD 0F8C                        _RCIF 7CF5  
+                      _OERR 7D59                        _SPEN 7D5F                        _TRMT 7D61  
+                      _TXEN 7D65                        _SYNC 7D64                        _main 0916  
+                      fsr0h 0FEA                        indf0 0FEF                        fsr2h 0FDA  
+                      fsr0l 0FE9                        indf2 0FDF                        fsr1l 0FE1  
+                      fsr2l 0FD9                        start 0000                ___param_bank 0000  
+                     ?_main 0001                       _RCREG 0FAE                       _SPBRG 0FAF  
+                     _TRISD 0F95                       _TXREG 0FAD             __end_of_lcd_cmd 0988  
+           __end_of_lcd_str 089A                       _index 0012                       tablat 0FF5  
+                     status 0FD8             __initialization 08E0                __end_of_main 0944  
+                    ??_main 0005               __activetblptr 0002            __end_of_lcd_data 09A6  
+          __end_of_lcd_init 096A           uart_receive_str@i 0002                      clear_0 0906  
+                    isa$std 0001                   ??_lcd_cmd 0001                   ??_lcd_str 0004  
+         ?_uart_receive_str 0001                __pdataCOMRAM 0019                __mediumconst 0000  
+                    tblptrh 0FF7                      tblptrl 0FF6                      tblptru 0FF8  
+        ??_uart_receive_str 0002                  __accesstop 0060     __end_of__initialization 090C  
+             ___rparam_used 0001  __end_ofkeypad_getkey@F3226 080D              __pcstackCOMRAM 0001  
+                 ?_lcd_data 0001                   ?_lcd_init 0001                     __Hparam 0000  
+                   __Lparam 0000                __psmallconst 0800          uart_receive_str@ch 0004  
+                   __pcinit 08E0                     __ramtop 0800                     __ptext0 0916  
+                   __ptext1 089A                     __ptext2 0988                     __ptext3 083C  
+                   __ptext4 0998                     __ptext5 0944                     __ptext6 096A  
+                   _lcd_cmd 096A                     _lcd_str 083C                     _entered 0014  
+                ??_lcd_data 0001                  ??_lcd_init 0003        end_of_initialization 090C  
+             __Lmediumconst 0000           __end_of_uart_init 0998                     postdec1 0FE5  
+                   postinc0 0FEE                   _PORTBbits 0F81                   _TRISBbits 0F93  
+                 _TRISCbits 0F94                   _TRISEbits 0F96                  lcd_cmd@cmd 0002  
+                lcd_str@str 0002               __pidataCOMRAM 09A6          keypad_getkey@F3226 0801  
+       start_initialization 08E0                 __pbssCOMRAM 0011      uart_receive_str@buffer 0001  
+   keypad_password@position 0011                    ?_lcd_cmd 0001                    ?_lcd_str 0002  
+               __smallconst 0800                    _LATCbits 0F8B                    _LATEbits 0F8D  
+          _uart_receive_str 089A                   _uart_init 0988                 _INTCON2bits 0FF1  
+                 copy_data0 08F4                    __Hrparam 0000                    __Lrparam 0000  
+                ?_uart_init 0001                    _lcd_data 0998                    _lcd_init 0944  
+                  _password 0019                    isa$xinst 0000              keypad@position 0013  
+           main@time_buffer 0005                 ??_uart_init 0001    __end_of_uart_receive_str 08E0  
