@@ -1,26 +1,29 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"24 ./keypad.h
-[; ;./keypad.h: 24: char keypad_getkey(void);
-[v _keypad_getkey `(uc ~T0 @X0 0 ef ]
+"6 ./uart.h
+[; ;./uart.h: 6: void uart_init(void);
+[v _uart_init `(v ~T0 @X0 0 ef ]
+[v F205 `(v ~T0 @X0 1 tf1`ul ]
+"20 C:\Program Files\Microchip\xc8\v2.50\pic\include\builtins.h
+[v __delay `JF205 ~T0 @X0 0 e ]
+[p i __delay ]
+"9 ./uart.h
+[; ;./uart.h: 9: void uart_write_char(unsigned char data);
+[v _uart_write_char `(v ~T0 @X0 0 ef1`uc ]
 "16 ./lcd.h
+[; ;./lcd.h: 16: void lcd_cmd(unsigned char cmd);
+[; ;./lcd.h: 16: void lcd_cmd(unsigned char cmd);
 [; ;./lcd.h: 16: void lcd_cmd(unsigned char cmd);
 [; ;./lcd.h: 16: void lcd_cmd(unsigned char cmd);
 [v _lcd_cmd `(v ~T0 @X0 0 ef1`uc ]
 "18
 [; ;./lcd.h: 18: void lcd_str(unsigned char *str);
 [; ;./lcd.h: 18: void lcd_str(unsigned char *str);
+[; ;./lcd.h: 18: void lcd_str(unsigned char *str);
+[; ;./lcd.h: 18: void lcd_str(unsigned char *str);
 [v _lcd_str `(v ~T0 @X0 0 ef1`*uc ]
-"39 C:\Program Files\Microchip\xc8\v2.50\pic\include\c99\string.h
-[; ;C:\Program Files\Microchip\xc8\v2.50\pic\include\c99\string.h: 39: int strcmp (const char *, const char *);
-[v _strcmp `(i ~T0 @X0 0 ef2`*Cuc`*Cuc ]
-[v F205 `(v ~T0 @X0 1 tf1`ul ]
-"20 C:\Program Files\Microchip\xc8\v2.50\pic\include\builtins.h
-[v __delay `JF205 ~T0 @X0 0 e ]
-[p i __delay ]
-"17 ./lcd.h
-[; ;./lcd.h: 17: void lcd_data(unsigned char data);
-[; ;./lcd.h: 17: void lcd_data(unsigned char data);
-[v _lcd_data `(v ~T0 @X0 0 ef1`uc ]
+"10 ./uart.h
+[; ;./uart.h: 10: void uart_receive_str(char *buffer);
+[v _uart_receive_str `(v ~T0 @X0 0 ef1`*uc ]
 "54 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 54: __asm("SPPDATA equ 0F62h");
 [; <" SPPDATA equ 0F62h ;# ">
@@ -531,161 +534,58 @@ Version 4.0 HI-TECH Software Intermediate Code
 "8893
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 8893: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
-"3 passward.c
-[; ;passward.c: 3: char password[] = "1234";
-[v _password `uc ~T0 @X0 -> 5 `i e ]
-[i _password
-:U ..
--> 49 `c
--> 50 `c
--> 51 `c
--> 52 `c
--> 0 `c
-..
-]
-"4
-[; ;passward.c: 4: char entered[5];
-[v _entered `uc ~T0 @X0 -> 5 `i e ]
+"4 login.c
+[; ;login.c: 4: _Bool login(void)
+[v _login `(a ~T0 @X0 1 ef ]
 "5
-[; ;passward.c: 5: unsigned char index = 0;
-[v _index `uc ~T0 @X0 1 e ]
-[i _index
--> -> 0 `i `uc
-]
-"7
-[; ;passward.c: 7: void keypad_password() {
-[v _keypad_password `(v ~T0 @X0 1 ef ]
+[; ;login.c: 5: {
 {
-[e :U _keypad_password ]
+[e :U _login ]
 [f ]
+"6
+[; ;login.c: 6:     uart_init();
+[e ( _uart_init ..  ]
+"7
+[; ;login.c: 7:     _delay((unsigned long)((10)*(20000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
 "8
-[; ;passward.c: 8:     static unsigned char position = 0;
-[v F3403 `uc ~T0 @X0 1 s position ]
-[i F3403
--> -> 0 `i `uc
-]
+[; ;login.c: 8:     uart_write_char(1);
+[e ( _uart_write_char (1 -> -> 1 `i `uc ]
 "9
-[; ;passward.c: 9:     char key = keypad_getkey();
-[v _key `uc ~T0 @X0 1 a ]
-[e = _key ( _keypad_getkey ..  ]
+[; ;login.c: 9:     char buffer[12];
+[v _buffer `uc ~T0 @X0 -> 12 `i a ]
+"10
+[; ;login.c: 10:     lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
 "11
-[; ;passward.c: 11:     if (key) {
-[e $ ! != -> _key `i -> 0 `i 369  ]
-{
+[; ;login.c: 11:     lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
 "12
-[; ;passward.c: 12:         if (key == '*')
-[e $ ! == -> _key `ui -> 42 `ui 370  ]
-"13
-[; ;passward.c: 13:         {
-{
-"14
-[; ;passward.c: 14:             index = 0;
-[e = _index -> -> 0 `i `uc ]
-"15
-[; ;passward.c: 15:             position = 0;
-[e = F3403 -> -> 0 `i `uc ]
-"16
-[; ;passward.c: 16:             lcd_cmd(0xC0);
-[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
-"17
-[; ;passward.c: 17:             lcd_str("                ");
+[; ;login.c: 12:     lcd_str("Time: ");
 [e ( _lcd_str (1 :s 1C ]
-"18
-[; ;passward.c: 18:             lcd_cmd(0xC0);
-[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
-"19
-[; ;passward.c: 19:             return;
-[e $UE 368  ]
-"20
-[; ;passward.c: 20:         }
-}
-[e :U 370 ]
-"22
-[; ;passward.c: 22:         if (key == '#')
-[e $ ! == -> _key `ui -> 35 `ui 371  ]
-"23
-[; ;passward.c: 23:         {
-{
-"24
-[; ;passward.c: 24:             entered[index] = '\0';
-[e = *U + &U _entered * -> _index `ux -> -> # *U &U _entered `ui `ux -> -> 0 `ui `uc ]
-"25
-[; ;passward.c: 25:             lcd_cmd(0xC0);
-[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
-"26
-[; ;passward.c: 26:             if (strcmp(entered, password) == 0) {
-[e $ ! == ( _strcmp (2 , -> &U _entered `*Cuc -> &U _password `*Cuc -> 0 `i 372  ]
-{
-"27
-[; ;passward.c: 27:                 lcd_str("Access Granted");
-[e ( _lcd_str (1 :s 2C ]
-"28
-[; ;passward.c: 28:             } else {
-}
-[e $U 373  ]
-[e :U 372 ]
-{
-"29
-[; ;passward.c: 29:                 lcd_str("Access denied");
-[e ( _lcd_str (1 :s 3C ]
-"30
-[; ;passward.c: 30:             }
-}
-[e :U 373 ]
-"32
-[; ;passward.c: 32:             _delay((unsigned long)((2000)*(20000000/4000.0)));
-[e ( __delay (1 -> * -> -> 2000 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
-"33
-[; ;passward.c: 33:             index = 0;
-[e = _index -> -> 0 `i `uc ]
-"34
-[; ;passward.c: 34:             position = 0;
-[e = F3403 -> -> 0 `i `uc ]
-"35
-[; ;passward.c: 35:             lcd_cmd(0xC0);
-[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
-"36
-[; ;passward.c: 36:             lcd_str("                ");
-[e ( _lcd_str (1 :s 4C ]
-"37
-[; ;passward.c: 37:             lcd_cmd(0xC0);
-[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
-"38
-[; ;passward.c: 38:             return;
-[e $UE 368  ]
-"40
-[; ;passward.c: 40:         }
-}
-[e :U 371 ]
-"41
-[; ;passward.c: 41:         if (index < 4) {
-[e $ ! < -> _index `i -> 4 `i 374  ]
-{
-"42
-[; ;passward.c: 42:             entered[index++] = key;
-[e = *U + &U _entered * -> ++ _index -> -> 1 `i `uc `ux -> -> # *U &U _entered `ui `ux _key ]
-"43
-[; ;passward.c: 43:             lcd_cmd(0xC0 + position);
-[e ( _lcd_cmd (1 -> + -> 192 `i -> F3403 `i `uc ]
-"44
-[; ;passward.c: 44:             lcd_data('*');
-[e ( _lcd_data (1 -> -> 42 `ui `uc ]
-"45
-[; ;passward.c: 45:             position++;
-[e ++ F3403 -> -> 1 `i `uc ]
-"46
-[; ;passward.c: 46:         }
-}
-[e :U 374 ]
-"47
-[; ;passward.c: 47:     }
-}
+"13
+[; ;login.c: 13:     lcd_cmd(0x86);
+[e ( _lcd_cmd (1 -> -> 134 `i `uc ]
+"14
+[; ;login.c: 14:     while (1)
 [e :U 369 ]
-"49
-[; ;passward.c: 49: }
-[e :UE 368 ]
+"15
+[; ;login.c: 15:     {
+{
+"16
+[; ;login.c: 16:         uart_receive_str(buffer);
+[e ( _uart_receive_str (1 &U _buffer ]
+"17
+[; ;login.c: 17:         lcd_str(buffer);
+[e ( _lcd_str (1 -> &U _buffer `*uc ]
+"18
+[; ;login.c: 18:     }
 }
-[a 2C 65 99 99 101 115 115 32 71 114 97 110 116 101 100 0 ]
-[a 3C 65 99 99 101 115 115 32 100 101 110 105 101 100 0 ]
-[a 1C 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 0 ]
-[a 4C 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 32 0 ]
+[e :U 368 ]
+[e $U 369  ]
+[e :U 370 ]
+"20
+[; ;login.c: 20: }
+[e :UE 367 ]
+}
+[a 1C 84 105 109 101 58 32 0 ]

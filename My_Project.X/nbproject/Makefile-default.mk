@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c lcd.c keypad.c uart.c password.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c lcd.c keypad.c uart.c password.c login.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/lcd.p1 ${OBJECTDIR}/keypad.p1 ${OBJECTDIR}/uart.p1 ${OBJECTDIR}/password.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/lcd.p1.d ${OBJECTDIR}/keypad.p1.d ${OBJECTDIR}/uart.p1.d ${OBJECTDIR}/password.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/lcd.p1 ${OBJECTDIR}/keypad.p1 ${OBJECTDIR}/uart.p1 ${OBJECTDIR}/password.p1 ${OBJECTDIR}/login.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/lcd.p1.d ${OBJECTDIR}/keypad.p1.d ${OBJECTDIR}/uart.p1.d ${OBJECTDIR}/password.p1.d ${OBJECTDIR}/login.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/lcd.p1 ${OBJECTDIR}/keypad.p1 ${OBJECTDIR}/uart.p1 ${OBJECTDIR}/password.p1
+OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/lcd.p1 ${OBJECTDIR}/keypad.p1 ${OBJECTDIR}/uart.p1 ${OBJECTDIR}/password.p1 ${OBJECTDIR}/login.p1
 
 # Source Files
-SOURCEFILES=main.c lcd.c keypad.c uart.c password.c
+SOURCEFILES=main.c lcd.c keypad.c uart.c password.c login.c
 
 
 
@@ -128,6 +128,14 @@ ${OBJECTDIR}/password.p1: password.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/password.d ${OBJECTDIR}/password.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/password.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/login.p1: login.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/login.p1.d 
+	@${RM} ${OBJECTDIR}/login.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c  -D__DEBUG=1  -mdebugger=none   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/login.p1 login.c 
+	@-${MV} ${OBJECTDIR}/login.d ${OBJECTDIR}/login.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/login.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk 
 	@${MKDIR} "${OBJECTDIR}" 
@@ -168,6 +176,14 @@ ${OBJECTDIR}/password.p1: password.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/password.p1 password.c 
 	@-${MV} ${OBJECTDIR}/password.d ${OBJECTDIR}/password.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/password.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/login.p1: login.c  nbproject/Makefile-${CND_CONF}.mk 
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/login.p1.d 
+	@${RM} ${OBJECTDIR}/login.p1 
+	${MP_CC} $(MP_EXTRA_CC_PRE) -mcpu=$(MP_PROCESSOR_OPTION) -c   -mdfp="${DFP_DIR}/xc8"  -fno-short-double -fno-short-float -memi=wordwrite -O0 -fasmfile -maddrqual=ignore -xassembler-with-cpp -mwarn=-3 -Wa,-a -DXPRJ_default=$(CND_CONF)  -msummary=-psect,-class,+mem,-hex,-file  -ginhx32 -Wl,--data-init -mno-keep-startup -mno-download -mno-default-config-bits $(COMPARISON_BUILD)  -std=c99 -gdwarf-3 -mstack=compiled:auto:auto:auto     -o ${OBJECTDIR}/login.p1 login.c 
+	@-${MV} ${OBJECTDIR}/login.d ${OBJECTDIR}/login.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/login.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

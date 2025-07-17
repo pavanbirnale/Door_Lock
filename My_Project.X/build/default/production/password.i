@@ -5744,11 +5744,12 @@ void lcd_data(unsigned char data);
 void lcd_str(unsigned char *str);
 # 2 "./keypad.h" 2
 # 24 "./keypad.h"
+void keypad_init(void);
 char keypad_getkey(void);
-
-void keypad_init();
-void keypad(void);
 # 2 "./password.h" 2
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\c99\\stdbool.h" 1 3
+# 3 "./password.h" 2
 
 # 1 "./lcd.h" 1
 # 15 "./lcd.h"
@@ -5756,11 +5757,30 @@ void lcd_init();
 void lcd_cmd(unsigned char cmd);
 void lcd_data(unsigned char data);
 void lcd_str(unsigned char *str);
-# 3 "./password.h" 2
+# 4 "./password.h" 2
 
 
-void keypad_password(void);
+_Bool keypad_password(void);
 # 1 "password.c" 2
+
+# 1 "./lcd.h" 1
+# 15 "./lcd.h"
+void lcd_init();
+void lcd_cmd(unsigned char cmd);
+void lcd_data(unsigned char data);
+void lcd_str(unsigned char *str);
+# 2 "password.c" 2
+
+# 1 "./keypad.h" 1
+
+# 1 "./lcd.h" 1
+# 15 "./lcd.h"
+void lcd_init();
+void lcd_cmd(unsigned char cmd);
+void lcd_data(unsigned char data);
+void lcd_str(unsigned char *str);
+# 2 "./keypad.h" 2
+# 3 "password.c" 2
 
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\c99\\string.h" 1 3
 # 25 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\c99\\string.h" 3
@@ -5819,17 +5839,20 @@ size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
 
 
 void *memccpy (void *restrict, const void *restrict, int, size_t);
-# 2 "password.c" 2
+# 4 "password.c" 2
+
 
 char password[] = "1234";
 char entered[5];
 unsigned char index = 0;
 
-void keypad_password() {
+_Bool keypad_password()
+{
     static unsigned char position = 0;
     char key = keypad_getkey();
 
-    if (key) {
+    if (key)
+    {
         if (key == '*')
         {
             index = 0;
@@ -5837,15 +5860,15 @@ void keypad_password() {
             lcd_cmd(0xC0);
             lcd_str("                ");
             lcd_cmd(0xC0);
-            return;
+            return 0;
         }
-
         if (key == '#')
         {
             entered[index] = '\0';
             lcd_cmd(0xC0);
             if (strcmp(entered, password) == 0) {
                 lcd_str("Access Granted");
+                return 1;
             } else {
                 lcd_str("Access denied");
             }
@@ -5856,15 +5879,15 @@ void keypad_password() {
             lcd_cmd(0xC0);
             lcd_str("                ");
             lcd_cmd(0xC0);
-            return;
+            return 0;
 
         }
-        if (index < 4) {
+         if (index < 4)
+        {
             entered[index++] = key;
-            lcd_cmd(0xC0 + position);
             lcd_data('*');
-            position++;
         }
-    }
 
+        return 0;
+    }
 }

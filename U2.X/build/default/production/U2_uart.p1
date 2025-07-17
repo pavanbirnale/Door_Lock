@@ -1,5 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
-"3600 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h
+"8633 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 8633: extern volatile __bit TRISC6 __attribute__((address(0x7CA6)));
+[v _TRISC6 `Vb ~T0 @X0 0 e@31910 ]
+"3600
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 3600: extern volatile unsigned char SPBRG __attribute__((address(0xFAF)));
 [v _SPBRG `Vuc ~T0 @X0 0 e@4015 ]
 "7145
@@ -27,6 +30,18 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3576
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 3576: extern volatile unsigned char TXREG __attribute__((address(0xFAD)));
 [v _TXREG `Vuc ~T0 @X0 0 e@4013 ]
+"7892
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 7892: extern volatile __bit OERR __attribute__((address(0x7D59)));
+[v _OERR `Vb ~T0 @X0 0 e@32089 ]
+"7295
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 7295: extern volatile __bit CREN __attribute__((address(0x7D5C)));
+[v _CREN `Vb ~T0 @X0 0 e@32092 ]
+"8180
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 8180: extern volatile __bit RCIF __attribute__((address(0x7CF5)));
+[v _RCIF `Vb ~T0 @X0 0 e@31989 ]
+"3588
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 3588: extern volatile unsigned char RCREG __attribute__((address(0xFAE)));
+[v _RCREG `Vuc ~T0 @X0 0 e@4014 ]
 "54 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -447,6 +462,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 {
 [e :U _uart_init ]
 [f ]
+"8
+[; ;U2_uart.c: 8:     TRISC6 = 0;
+[e = _TRISC6 -> -> 0 `i `b ]
 "9
 [; ;U2_uart.c: 9:     SPBRG = 77;
 [e = _SPBRG -> -> 77 `i `uc ]
@@ -536,4 +554,47 @@ Version 4.0 HI-TECH Software Intermediate Code
 "32
 [; ;U2_uart.c: 32: }
 [e :UE 286 ]
+}
+"34
+[; ;U2_uart.c: 34: unsigned char uart_read_char(void)
+[v _uart_read_char `(uc ~T0 @X0 1 ef ]
+"35
+[; ;U2_uart.c: 35: {
+{
+[e :U _uart_read_char ]
+[f ]
+"36
+[; ;U2_uart.c: 36:     if (OERR)
+[e $ ! _OERR 291  ]
+"37
+[; ;U2_uart.c: 37:     {
+{
+"38
+[; ;U2_uart.c: 38:         CREN = 0;
+[e = _CREN -> -> 0 `i `b ]
+"39
+[; ;U2_uart.c: 39:         CREN = 1;
+[e = _CREN -> -> 1 `i `b ]
+"40
+[; ;U2_uart.c: 40:     }
+}
+[e :U 291 ]
+"41
+[; ;U2_uart.c: 41:     while (!RCIF)
+[e $U 292  ]
+[e :U 293 ]
+"42
+[; ;U2_uart.c: 42:         ;
+[e :U 292 ]
+"41
+[; ;U2_uart.c: 41:     while (!RCIF)
+[e $ ! _RCIF 293  ]
+[e :U 294 ]
+"43
+[; ;U2_uart.c: 43:     return RCREG;
+[e ) _RCREG ]
+[e $UE 290  ]
+"44
+[; ;U2_uart.c: 44: }
+[e :UE 290 ]
 }

@@ -5742,91 +5742,90 @@ void lcd_data(unsigned char data);
 void lcd_str(unsigned char *str);
 # 2 "./keypad.h" 2
 # 24 "./keypad.h"
+void keypad_init(void);
 char keypad_getkey(void);
-
-void keypad_init();
-void keypad(void);
 # 1 "keypad.c" 2
 
 
-
-void keypad_init()
+void keypad_init(void)
 {
 
-    TRISCbits.TRISC6=0;
-    TRISEbits.TRISE0=0;
-    TRISEbits.TRISE1=0;
-    TRISEbits.TRISE2=0;
+    TRISBbits.TRISB0 = 0;
+    TRISBbits.TRISB1 = 0;
+    TRISBbits.TRISB2 = 0;
+    TRISBbits.TRISB3 = 0;
 
 
-    TRISBbits.TRISB5=1;
-    TRISBbits.TRISB6=1;
-    TRISBbits.TRISB7=1;
+    TRISBbits.TRISB5 = 1;
+    TRISBbits.TRISB6 = 1;
+    TRISBbits.TRISB7 = 1;
 
 
-
-    LATCbits.LATC6=1;
-    LATEbits.LATE0=1;
-    LATEbits.LATE1=1;
-    LATEbits.LATE2=1;
     INTCON2bits.RBPU = 0;
-}
 
+
+    LATB = 0xFF;
+}
 
 char keypad_getkey(void)
 {
-    const char keys[4][3]={
-        {'1','2','3'},
-        {'4','5','6'},
-        {'7','8','9'},
-        {'*','0','#'}
-    };
+    const char keys[4][3] = {
+        {'1', '2', '3'},
+        {'4', '5', '6'},
+        {'7', '8', '9'},
+        {'*', '0', '#'}};
 
-
-    for(char row =0; row<4; row++)
+    for (char row = 0; row < 4; row++)
     {
 
-        LATCbits.LATC6 = (row==0)?0:1;
-        LATEbits.LATE0 = (row==1)?0:1;
-        LATEbits.LATE1 = (row==2)?0:1;
-        LATEbits.LATE2 = (row==3)?0:1;
+        LATBbits.LATB0 = 1;
+        LATBbits.LATB1 = 1;
+        LATBbits.LATB2 = 1;
+        LATBbits.LATB3 = 1;
 
 
+        switch (row)
+        {
+        case 0:
+            LATBbits.LATB0 = 0;
+            break;
+        case 1:
+            LATBbits.LATB1 = 0;
+            break;
+        case 2:
+            LATBbits.LATB2 = 0;
+            break;
+        case 3:
+            LATBbits.LATB3 = 0;
+            break;
+        }
 
-        if(PORTBbits.RB5==0)
+        _delay((unsigned long)((10)*(20000000/4000000.0)));
+
+        if (PORTBbits.RB5 == 0)
         {
             _delay((unsigned long)((20)*(20000000/4000.0)));
-            while(PORTBbits.RB5==0);
+            while (PORTBbits.RB5 == 0)
+                ;
             return keys[row][0];
         }
-        if(PORTBbits.RB6==0)
+
+        if (PORTBbits.RB6 == 0)
         {
             _delay((unsigned long)((20)*(20000000/4000.0)));
-            while(PORTBbits.RB6==0);
+            while (PORTBbits.RB6 == 0)
+                ;
             return keys[row][1];
         }
-        if(PORTBbits.RB7==0)
+
+        if (PORTBbits.RB7 == 0)
         {
             _delay((unsigned long)((20)*(20000000/4000.0)));
-            while(PORTBbits.RB7==0);
+            while (PORTBbits.RB7 == 0)
+                ;
             return keys[row][2];
         }
     }
+
     return 0;
-}
-
-
-
-void keypad(void)
-{
-    static unsigned char position = 0;
-    char key = keypad_getkey();
-    if (key)
-    {
-        lcd_cmd(0xC0 + position);
-        lcd_data(key);
-        position++;
-        if (position > 15)
-            position = 0;
-    }
 }

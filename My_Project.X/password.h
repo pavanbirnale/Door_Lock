@@ -1,5 +1,6 @@
 #include <xc.h>
 #include "keypad.h"
+#include <stdbool.h>
 #include "lcd.h"
 
-void keypad_password(void);
+bool keypad_password(void);

@@ -1,14 +1,19 @@
 #include "password.h"
-#include "string.h"
+#include "lcd.h"
+#include "keypad.h"
+#include <string.h>
+
 char password[] = "1234";
 char entered[5];
 unsigned char index = 0;
 
-void keypad_password() {
+bool keypad_password()
+{
     static unsigned char position = 0;
     char key = keypad_getkey();
 
-    if (key) {
+    if (key)
+    {
         if (key == '*') //  Reset input
         {
             index = 0;
@@ -16,15 +21,15 @@ void keypad_password() {
             lcd_cmd(0xC0);
             lcd_str("                "); // Clear line
             lcd_cmd(0xC0);
-            return;
+            return 0;
         }
-
         if (key == '#') // Enter key
         {
             entered[index] = '\0'; // Null Terminate
             lcd_cmd(0xC0);
             if (strcmp(entered, password) == 0) {
                 lcd_str("Access Granted");
+                return 1;
             } else {
                 lcd_str("Access denied");
             }
@@ -35,15 +40,15 @@ void keypad_password() {
             lcd_cmd(0xC0);
             lcd_str("                "); // clear line
             lcd_cmd(0xC0);
-            return;
+            return 0;
 
         }
-        if (index < 4) {
+         if (index < 4)
+        {
             entered[index++] = key;
-            lcd_cmd(0xC0 + position);
-            lcd_data('*'); // show * instead of actual digit
-            position++;
+            lcd_data('*'); // Show asterisk for each key
         }
-    }
 
+        return 0;
+    }
 }

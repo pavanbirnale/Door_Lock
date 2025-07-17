@@ -1,4 +1,4 @@
-# 1 "passward.c"
+# 1 "login.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,8 +6,7 @@
 # 1 "<built-in>" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "passward.c" 2
-# 1 "./passward.h" 1
+# 1 "login.c" 2
 # 1 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\xc.h" 1 3
 # 18 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\xc.h" 3
 extern const char __xc8_OPTIM_SPEED;
@@ -5732,8 +5731,9 @@ __attribute__((__unsupported__("The " "Write_b_eep" " routine is no longer suppo
 unsigned char __t1rd16on(void);
 unsigned char __t3rd16on(void);
 # 33 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\xc.h" 2 3
-# 1 "./passward.h" 2
+# 1 "login.c" 2
 
+# 1 "./login.h" 1
 # 1 "./keypad.h" 1
 
 # 1 "./lcd.h" 1
@@ -5744,11 +5744,9 @@ void lcd_data(unsigned char data);
 void lcd_str(unsigned char *str);
 # 2 "./keypad.h" 2
 # 24 "./keypad.h"
+void keypad_init(void);
 char keypad_getkey(void);
-
-void keypad_init();
-void keypad(void);
-# 2 "./passward.h" 2
+# 1 "./login.h" 2
 
 # 1 "./lcd.h" 1
 # 15 "./lcd.h"
@@ -5756,115 +5754,69 @@ void lcd_init();
 void lcd_cmd(unsigned char cmd);
 void lcd_data(unsigned char data);
 void lcd_str(unsigned char *str);
-# 3 "./passward.h" 2
+# 2 "./login.h" 2
+
+# 1 "./password.h" 1
+
+# 1 "./keypad.h" 1
+
+# 1 "./lcd.h" 1
+# 15 "./lcd.h"
+void lcd_init();
+void lcd_cmd(unsigned char cmd);
+void lcd_data(unsigned char data);
+void lcd_str(unsigned char *str);
+# 2 "./keypad.h" 2
+# 2 "./password.h" 2
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\c99\\stdbool.h" 1 3
+# 3 "./password.h" 2
+
+# 1 "./lcd.h" 1
+# 15 "./lcd.h"
+void lcd_init();
+void lcd_cmd(unsigned char cmd);
+void lcd_data(unsigned char data);
+void lcd_str(unsigned char *str);
+# 4 "./password.h" 2
 
 
-void keypad_passward(void);
-# 1 "passward.c" 2
+_Bool keypad_password(void);
+# 3 "./login.h" 2
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\c99\\string.h" 1 3
-# 25 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\c99\\string.h" 3
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\c99\\bits/alltypes.h" 1 3
-# 421 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\c99\\bits/alltypes.h" 3
-typedef struct __locale_struct * locale_t;
-# 26 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\c99\\string.h" 2 3
-
-void *memcpy (void *restrict, const void *restrict, size_t);
-void *memmove (void *, const void *, size_t);
-void *memset (void *, int, size_t);
-int memcmp (const void *, const void *, size_t);
-void *memchr (const void *, int, size_t);
-
-char *strcpy (char *restrict, const char *restrict);
-char *strncpy (char *restrict, const char *restrict, size_t);
-
-char *strcat (char *restrict, const char *restrict);
-char *strncat (char *restrict, const char *restrict, size_t);
-
-int strcmp (const char *, const char *);
-int strncmp (const char *, const char *, size_t);
-
-int strcoll (const char *, const char *);
-size_t strxfrm (char *restrict, const char *restrict, size_t);
-
-char *strchr (const char *, int);
-char *strrchr (const char *, int);
-
-size_t strcspn (const char *, const char *);
-size_t strspn (const char *, const char *);
-char *strpbrk (const char *, const char *);
-char *strstr (const char *, const char *);
-char *strtok (char *restrict, const char *restrict);
-
-size_t strlen (const char *);
-
-char *strerror (int);
+# 1 "./uart.h" 1
 
 
 
 
-char *strtok_r (char *restrict, const char *restrict, char **restrict);
-int strerror_r (int, char *, size_t);
-char *stpcpy(char *restrict, const char *restrict);
-char *stpncpy(char *restrict, const char *restrict, size_t);
-size_t strnlen (const char *, size_t);
-char *strdup (const char *);
-char *strndup (const char *, size_t);
-char *strsignal(int);
-char *strerror_l (int, locale_t);
-int strcoll_l (const char *, const char *, locale_t);
-size_t strxfrm_l (char *restrict, const char *restrict, size_t, locale_t);
+
+void uart_init(void);
+char uart_read_char(void);
+
+void uart_write_char(unsigned char data);
+void uart_receive_str(char *buffer);
+# 4 "./login.h" 2
 
 
 
+_Bool login(void);
+# 2 "login.c" 2
 
-void *memccpy (void *restrict, const void *restrict, int, size_t);
-# 2 "passward.c" 2
 
-char password[] = "1234";
-char entered[5];
-unsigned char index = 0;
-
-void keypad_password() {
-    static unsigned char position = 0;
-    char key = keypad_getkey();
-
-    if (key) {
-        if (key == '*')
-        {
-            index = 0;
-            position = 0;
-            lcd_cmd(0xC0);
-            lcd_str("                ");
-            lcd_cmd(0xC0);
-            return;
-        }
-
-        if (key == '#')
-        {
-            entered[index] = '\0';
-            lcd_cmd(0xC0);
-            if (strcmp(entered, password) == 0) {
-                lcd_str("Access Granted");
-            } else {
-                lcd_str("Access denied");
-            }
-
-            _delay((unsigned long)((2000)*(20000000/4000.0)));
-            index = 0;
-            position = 0;
-            lcd_cmd(0xC0);
-            lcd_str("                ");
-            lcd_cmd(0xC0);
-            return;
-
-        }
-        if (index < 4) {
-            entered[index++] = key;
-            lcd_cmd(0xC0 + position);
-            lcd_data('*');
-            position++;
-        }
+_Bool login(void)
+{
+    uart_init();
+    _delay((unsigned long)((10)*(20000000/4000.0)));
+    uart_write_char(1);
+    char buffer[12];
+    lcd_cmd(0x01);
+    lcd_cmd(0x80);
+    lcd_str("Time: ");
+    lcd_cmd(0x86);
+    while (1)
+    {
+        uart_receive_str(buffer);
+        lcd_str(buffer);
     }
 
 }

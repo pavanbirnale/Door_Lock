@@ -5741,6 +5741,49 @@ void lcd_data(unsigned char data);
 void lcd_str(unsigned char *str);
 # 2 "main.c" 2
 
+# 1 "./keypad.h" 1
+
+# 1 "./lcd.h" 1
+# 15 "./lcd.h"
+void lcd_init();
+void lcd_cmd(unsigned char cmd);
+void lcd_data(unsigned char data);
+void lcd_str(unsigned char *str);
+# 2 "./keypad.h" 2
+# 24 "./keypad.h"
+void keypad_init(void);
+char keypad_getkey(void);
+# 3 "main.c" 2
+
+# 1 "C:\\Program Files\\Microchip\\xc8\\v2.50\\pic\\include\\c99\\stdbool.h" 1 3
+# 4 "main.c" 2
+
+# 1 "./password.h" 1
+
+# 1 "./keypad.h" 1
+
+# 1 "./lcd.h" 1
+# 15 "./lcd.h"
+void lcd_init();
+void lcd_cmd(unsigned char cmd);
+void lcd_data(unsigned char data);
+void lcd_str(unsigned char *str);
+# 2 "./keypad.h" 2
+# 2 "./password.h" 2
+
+
+# 1 "./lcd.h" 1
+# 15 "./lcd.h"
+void lcd_init();
+void lcd_cmd(unsigned char cmd);
+void lcd_data(unsigned char data);
+void lcd_str(unsigned char *str);
+# 4 "./password.h" 2
+
+
+_Bool keypad_password(void);
+# 5 "main.c" 2
+
 # 1 "./uart.h" 1
 
 
@@ -5752,18 +5795,59 @@ char uart_read_char(void);
 
 void uart_write_char(unsigned char data);
 void uart_receive_str(char *buffer);
-# 3 "main.c" 2
+# 6 "main.c" 2
 
 
 
 
-void main(void) {
-    char time_buffer[12];
+void main()
+{
+    _Bool auth=0;
+    char buffer_str[12];
+    TRISCbits.TRISC2=0;
+
+    lcd_init();
+    keypad_init();
+    uart_init();
+
+    lcd_cmd(0x80);
+    lcd_str("Enter Password:");
+    lcd_cmd(0xC0);
+    LATCbits.LATC2=0;
+
+    while (1)
+    {
+        auth = keypad_password();
+        if (auth)
+        {
+           LATCbits.LATC2=1;
+            _delay((unsigned long)((100)*(20000000/4000.0)));
+            break;
+        }
+    }
+
+    lcd_cmd(0x01);
+    lcd_cmd(0x80);
+    lcd_str("Time:");
+
+    while (1)
+    {
+        lcd_cmd(0x86);
+
+        lcd_cmd(0x86);
+        uart_receive_str(buffer_str);
+        lcd_str(buffer_str);
+        _delay((unsigned long)((500)*(20000000/4000.0)));
+    }
+
+
+
+     char time_buffer[12];
     uart_init();
     lcd_init();
     lcd_cmd(0x80);
     while (1) {
-        uart_receive_str(time_buffer);
+        uart_write_char('A');
 
         lcd_str(time_buffer);
         lcd_cmd(0x80);

@@ -1,20 +1,72 @@
 Version 4.0 HI-TECH Software Intermediate Code
 [p mainexit ]
+"3858 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 3858:     struct {
+[s S154 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S154 . TRISC0 TRISC1 TRISC2 . TRISC6 TRISC7 ]
+"3866
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 3866:     struct {
+[s S155 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S155 . RC0 RC1 RC2 . RC6 RC7 ]
+"3857
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 3857: typedef union {
+[u S153 `S154 1 `S155 1 ]
+[n S153 . . . ]
+"3875
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 3875: extern volatile TRISCbits_t TRISCbits __attribute__((address(0xF94)));
+[v _TRISCbits `VS153 ~T0 @X0 0 e@3988 ]
+"15 ./lcd.h
+[; ;./lcd.h: 15: void lcd_init();
+[; ;./lcd.h: 15: void lcd_init();
+[; ;./lcd.h: 15: void lcd_init();
+[; ;./lcd.h: 15: void lcd_init();
+[v _lcd_init `(v ~T0 @X0 0 e? ]
+"24 ./keypad.h
+[; ;./keypad.h: 24: void keypad_init(void);
+[v _keypad_init `(v ~T0 @X0 0 ef ]
 "6 ./uart.h
 [; ;./uart.h: 6: void uart_init(void);
 [v _uart_init `(v ~T0 @X0 0 ef ]
-"15 ./lcd.h
-[; ;./lcd.h: 15: void lcd_init();
-[v _lcd_init `(v ~T0 @X0 0 e? ]
-"16
+"16 ./lcd.h
+[; ;./lcd.h: 16: void lcd_cmd(unsigned char cmd);
+[; ;./lcd.h: 16: void lcd_cmd(unsigned char cmd);
+[; ;./lcd.h: 16: void lcd_cmd(unsigned char cmd);
 [; ;./lcd.h: 16: void lcd_cmd(unsigned char cmd);
 [v _lcd_cmd `(v ~T0 @X0 0 ef1`uc ]
+"18
+[; ;./lcd.h: 18: void lcd_str(unsigned char *str);
+[; ;./lcd.h: 18: void lcd_str(unsigned char *str);
+[; ;./lcd.h: 18: void lcd_str(unsigned char *str);
+[; ;./lcd.h: 18: void lcd_str(unsigned char *str);
+[v _lcd_str `(v ~T0 @X0 0 ef1`*uc ]
+"3191 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 3191:     struct {
+[s S133 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S133 . LATC0 LATC1 LATC2 . LATC6 LATC7 ]
+"3199
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 3199:     struct {
+[s S134 :1 `uc 1 :1 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S134 . LC0 LC1 LC2 . LC6 LC7 ]
+"3190
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 3190: typedef union {
+[u S132 `S133 1 `S134 1 ]
+[n S132 . . . ]
+"3208
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 3208: extern volatile LATCbits_t LATCbits __attribute__((address(0xF8B)));
+[v _LATCbits `VS132 ~T0 @X0 0 e@3979 ]
+"6 ./password.h
+[; ;./password.h: 6: _Bool keypad_password(void);
+[v _keypad_password `(a ~T0 @X0 0 ef ]
+[v F205 `(v ~T0 @X0 1 tf1`ul ]
+"20 C:\Program Files\Microchip\xc8\v2.50\pic\include\builtins.h
+[v __delay `JF205 ~T0 @X0 0 e ]
+[p i __delay ]
 "10 ./uart.h
 [; ;./uart.h: 10: void uart_receive_str(char *buffer);
 [v _uart_receive_str `(v ~T0 @X0 0 ef1`*uc ]
-"18 ./lcd.h
-[; ;./lcd.h: 18: void lcd_str(unsigned char *str);
-[v _lcd_str `(v ~T0 @X0 0 ef1`*uc ]
+"9
+[; ;./uart.h: 9: void uart_write_char(unsigned char data);
+[v _uart_write_char `(v ~T0 @X0 0 ef1`uc ]
 "54 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 54: __asm("SPPDATA equ 0F62h");
 [; <" SPPDATA equ 0F62h ;# ">
@@ -526,44 +578,149 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4550.h: 8893: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 [v $root$_main `(v ~T0 @X0 0 e ]
-"7 main.c
-[; ;main.c: 7: void main(void) {
+"10 main.c
+[; ;main.c: 10: void main()
 [v _main `(v ~T0 @X0 1 ef ]
+"11
+[; ;main.c: 11: {
 {
 [e :U _main ]
 [f ]
-"8
-[; ;main.c: 8:     char time_buffer[12];
-[v _time_buffer `uc ~T0 @X0 -> 12 `i a ]
-"9
-[; ;main.c: 9:     uart_init();
-[e ( _uart_init ..  ]
-"10
-[; ;main.c: 10:     lcd_init();
-[e ( _lcd_init ..  ]
-"11
-[; ;main.c: 11:     lcd_cmd(0x80);
-[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
 "12
-[; ;main.c: 12:     while (1) {
-[e :U 369 ]
-{
+[; ;main.c: 12:     _Bool auth=0;
+[v _auth `a ~T0 @X0 1 a ]
+[e = _auth -> -> 0 `i `a ]
 "13
-[; ;main.c: 13:         uart_receive_str(time_buffer);
-[e ( _uart_receive_str (1 &U _time_buffer ]
-"15
-[; ;main.c: 15:         lcd_str(time_buffer);
-[e ( _lcd_str (1 -> &U _time_buffer `*uc ]
+[; ;main.c: 13:     char buffer_str[12];
+[v _buffer_str `uc ~T0 @X0 -> 12 `i a ]
+"14
+[; ;main.c: 14:     TRISCbits.TRISC2=0;
+[e = . . _TRISCbits 0 2 -> -> 0 `i `uc ]
 "16
-[; ;main.c: 16:         lcd_cmd(0x80);
-[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+[; ;main.c: 16:     lcd_init();
+[e ( _lcd_init ..  ]
 "17
-[; ;main.c: 17:     }
+[; ;main.c: 17:     keypad_init();
+[e ( _keypad_init ..  ]
+"18
+[; ;main.c: 18:     uart_init();
+[e ( _uart_init ..  ]
+"20
+[; ;main.c: 20:     lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"21
+[; ;main.c: 21:     lcd_str("Enter Password:");
+[e ( _lcd_str (1 :s 1C ]
+"22
+[; ;main.c: 22:     lcd_cmd(0xC0);
+[e ( _lcd_cmd (1 -> -> 192 `i `uc ]
+"23
+[; ;main.c: 23:     LATCbits.LATC2=0;
+[e = . . _LATCbits 0 2 -> -> 0 `i `uc ]
+"25
+[; ;main.c: 25:     while (1)
+[e :U 369 ]
+"26
+[; ;main.c: 26:     {
+{
+"27
+[; ;main.c: 27:         auth = keypad_password();
+[e = _auth ( _keypad_password ..  ]
+"28
+[; ;main.c: 28:         if (auth)
+[e $ ! != -> _auth `i -> 0 `i 371  ]
+"29
+[; ;main.c: 29:         {
+{
+"30
+[; ;main.c: 30:            LATCbits.LATC2=1;
+[e = . . _LATCbits 0 2 -> -> 1 `i `uc ]
+"31
+[; ;main.c: 31:             _delay((unsigned long)((100)*(20000000/4000.0)));
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"32
+[; ;main.c: 32:             break;
+[e $U 370  ]
+"33
+[; ;main.c: 33:         }
+}
+[e :U 371 ]
+"34
+[; ;main.c: 34:     }
 }
 [e :U 368 ]
 [e $U 369  ]
 [e :U 370 ]
-"18
-[; ;main.c: 18: }
+"36
+[; ;main.c: 36:     lcd_cmd(0x01);
+[e ( _lcd_cmd (1 -> -> 1 `i `uc ]
+"37
+[; ;main.c: 37:     lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"38
+[; ;main.c: 38:     lcd_str("Time:");
+[e ( _lcd_str (1 :s 2C ]
+"40
+[; ;main.c: 40:     while (1)
+[e :U 373 ]
+"41
+[; ;main.c: 41:     {
+{
+"42
+[; ;main.c: 42:         lcd_cmd(0x86);
+[e ( _lcd_cmd (1 -> -> 134 `i `uc ]
+"44
+[; ;main.c: 44:         lcd_cmd(0x86);
+[e ( _lcd_cmd (1 -> -> 134 `i `uc ]
+"45
+[; ;main.c: 45:         uart_receive_str(buffer_str);
+[e ( _uart_receive_str (1 &U _buffer_str ]
+"46
+[; ;main.c: 46:         lcd_str(buffer_str);
+[e ( _lcd_str (1 -> &U _buffer_str `*uc ]
+"47
+[; ;main.c: 47:         _delay((unsigned long)((500)*(20000000/4000.0)));
+[e ( __delay (1 -> * -> -> 500 `i `d / -> -> 20000000 `l `d .4000.0 `ul ]
+"48
+[; ;main.c: 48:     }
+}
+[e :U 372 ]
+[e $U 373  ]
+[e :U 374 ]
+"52
+[; ;main.c: 52:      char time_buffer[12];
+[v _time_buffer `uc ~T0 @X0 -> 12 `i a ]
+"53
+[; ;main.c: 53:     uart_init();
+[e ( _uart_init ..  ]
+"54
+[; ;main.c: 54:     lcd_init();
+[e ( _lcd_init ..  ]
+"55
+[; ;main.c: 55:     lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"56
+[; ;main.c: 56:     while (1) {
+[e :U 376 ]
+{
+"57
+[; ;main.c: 57:         uart_write_char('A');
+[e ( _uart_write_char (1 -> -> 65 `ui `uc ]
+"59
+[; ;main.c: 59:         lcd_str(time_buffer);
+[e ( _lcd_str (1 -> &U _time_buffer `*uc ]
+"60
+[; ;main.c: 60:         lcd_cmd(0x80);
+[e ( _lcd_cmd (1 -> -> 128 `i `uc ]
+"61
+[; ;main.c: 61:     }
+}
+[e :U 375 ]
+[e $U 376  ]
+[e :U 377 ]
+"62
+[; ;main.c: 62: }
 [e :UE 367 ]
 }
+[a 2C 84 105 109 101 58 0 ]
+[a 1C 69 110 116 101 114 32 80 97 115 115 119 111 114 100 58 0 ]

@@ -1,11 +1,65 @@
 Version 4.0 HI-TECH Software Intermediate Code
 [p mainexit ]
+"1932 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 1932:     struct {
+[s S72 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S72 . TRISC0 TRISC1 TRISC2 TRISC3 TRISC4 TRISC5 TRISC6 TRISC7 ]
+"1942
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 1942:     struct {
+[s S73 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S73 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
+"1931
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 1931: typedef union {
+[u S71 `S72 1 `S73 1 ]
+[n S71 . . . ]
+"1953
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 1953: extern volatile TRISCbits_t TRISCbits __attribute__((address(0xF94)));
+[v _TRISCbits `VS71 ~T0 @X0 0 e@3988 ]
 "4 ./U2_uart.h
 [; ;./U2_uart.h: 4: void uart_init(void);
 [v _uart_init `(v ~T0 @X0 0 ef ]
 "10 ./i2c.h
 [; ;./i2c.h: 10: void i2c_init(void);
 [v _i2c_init `(v ~T0 @X0 0 ef ]
+"8615 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 8615: extern volatile __bit TRISC0 __attribute__((address(0x7CA0)));
+[v _TRISC0 `Vb ~T0 @X0 0 e@31904 ]
+"8618
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 8618: extern volatile __bit TRISC1 __attribute__((address(0x7CA1)));
+[v _TRISC1 `Vb ~T0 @X0 0 e@31905 ]
+"7652
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 7652: extern volatile __bit LATC0 __attribute__((address(0x7C58)));
+[v _LATC0 `Vb ~T0 @X0 0 e@31832 ]
+"456
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 456:     struct {
+[s S23 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S23 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
+"466
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 466:     struct {
+[s S24 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S24 . T1OSO T1OSI CCP1 SCK SDI SDO TX RX ]
+"476
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 476:     struct {
+[s S25 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S25 . T13CKI CCP2 . SCL SDA . CK DT ]
+"486
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 486:     struct {
+[s S26 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S26 . T1CKI . P1A ]
+"491
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 491:     struct {
+[s S27 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S27 . . PA2 PA1 ]
+"455
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 455: typedef union {
+[u S22 `S23 1 `S24 1 `S25 1 `S26 1 `S27 1 ]
+[n S22 . . . . . . ]
+"497
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 497: extern volatile PORTCbits_t PORTCbits __attribute__((address(0xF82)));
+[v _PORTCbits `VS22 ~T0 @X0 0 e@3970 ]
+"7655
+[; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 7655: extern volatile __bit LATC1 __attribute__((address(0x7C59)));
+[v _LATC1 `Vb ~T0 @X0 0 e@31833 ]
 "5 ./rtc_ds1307.h
 [; ;./rtc_ds1307.h: 5: void rtc_get_time(unsigned char *h, unsigned char *m, unsigned char *s);
 [v _rtc_get_time `(v ~T0 @X0 0 ef3`*uc`*uc`*uc ]
@@ -15,6 +69,10 @@ Version 4.0 HI-TECH Software Intermediate Code
 "6 ./U2_uart.h
 [; ;./U2_uart.h: 6: void tx_str(const char *str);
 [v _tx_str `(v ~T0 @X0 0 ef1`*Cuc ]
+[v F205 `(v ~T0 @X0 1 tf1`ul ]
+"20 C:\Program Files\Microchip\xc8\v2.50\pic\include\builtins.h
+[v __delay `JF205 ~T0 @X0 0 e ]
+[p i __delay ]
 "54 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 54: __asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
@@ -430,51 +488,76 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h: 7001: __asm("TOSU equ 0FFFh");
 [; <" TOSU equ 0FFFh ;# ">
 [v $root$_main `(v ~T0 @X0 0 e ]
-"7 U2_main.c
-[; ;U2_main.c: 7: void main(void)
+"9 U2_main.c
+[; ;U2_main.c: 9: void main(void)
 [v _main `(v ~T0 @X0 1 ef ]
-"8
-[; ;U2_main.c: 8: {
+"10
+[; ;U2_main.c: 10: {
 {
 [e :U _main ]
 [f ]
-"9
-[; ;U2_main.c: 9:     char buffer[12];
-[v _buffer `uc ~T0 @X0 -> 12 `i a ]
-"10
-[; ;U2_main.c: 10:     unsigned char h, m, s;
+"12
+[; ;U2_main.c: 12:     unsigned char h, m, s;
 [v _h `uc ~T0 @X0 1 a ]
 [v _m `uc ~T0 @X0 1 a ]
 [v _s `uc ~T0 @X0 1 a ]
-"11
-[; ;U2_main.c: 11:     uart_init();
-[e ( _uart_init ..  ]
-"12
-[; ;U2_main.c: 12:     i2c_init();
-[e ( _i2c_init ..  ]
 "13
-[; ;U2_main.c: 13:     while (1)
-[e :U 285 ]
-"14
-[; ;U2_main.c: 14:     {
-{
+[; ;U2_main.c: 13:     char buffer[12];
+[v _buffer `uc ~T0 @X0 -> 12 `i a ]
 "15
-[; ;U2_main.c: 15:         rtc_get_time(&h, &m, &s);
-[e ( _rtc_get_time (3 , , &U _h &U _m &U _s ]
+[; ;U2_main.c: 15:     TRISCbits.RC2=1;
+[e = . . _TRISCbits 1 2 -> -> 1 `i `uc ]
 "17
-[; ;U2_main.c: 17:         sprintf(buffer, "%02d:%02d:%02d\n", h, m, s);
-[e ( _sprintf (1 , , , (. , &U _buffer :s 1C -> _h `i -> _m `i -> _s `i ]
+[; ;U2_main.c: 17:     uart_init();
+[e ( _uart_init ..  ]
+"18
+[; ;U2_main.c: 18:     i2c_init();
+[e ( _i2c_init ..  ]
 "19
-[; ;U2_main.c: 19:         tx_str(buffer);
-[e ( _tx_str (1 -> &U _buffer `*Cuc ]
+[; ;U2_main.c: 19:     TRISC0=0;
+[e = _TRISC0 -> -> 0 `i `b ]
 "20
-[; ;U2_main.c: 20:     }
-}
-[e :U 284 ]
-[e $U 285  ]
-[e :U 286 ]
+[; ;U2_main.c: 20:     TRISC1=0;
+[e = _TRISC1 -> -> 0 `i `b ]
 "21
-[; ;U2_main.c: 21: }
+[; ;U2_main.c: 21:     LATC0=1;
+[e = _LATC0 -> -> 1 `i `b ]
+"23
+[; ;U2_main.c: 23:     while (!PORTCbits.RC2);
+[e $U 284  ]
+[e :U 285 ]
+[e :U 284 ]
+[e $ ! != -> . . _PORTCbits 0 2 `i -> 0 `i 285  ]
+[e :U 286 ]
+"24
+[; ;U2_main.c: 24:     LATC1=1;
+[e = _LATC1 -> -> 1 `i `b ]
+"25
+[; ;U2_main.c: 25:     while (1)
+[e :U 288 ]
+"26
+[; ;U2_main.c: 26:     {
+{
+"27
+[; ;U2_main.c: 27:         rtc_get_time(&h, &m, &s);
+[e ( _rtc_get_time (3 , , &U _h &U _m &U _s ]
+"28
+[; ;U2_main.c: 28:         sprintf(buffer, "%02d:%02d:%02d\n", h, m, s);
+[e ( _sprintf (1 , , , (. , &U _buffer :s 1C -> _h `i -> _m `i -> _s `i ]
+"29
+[; ;U2_main.c: 29:         tx_str(buffer);
+[e ( _tx_str (1 -> &U _buffer `*Cuc ]
+"30
+[; ;U2_main.c: 30:         _delay((unsigned long)((1000)*(12000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 12000000 `l `d .4000.0 `ul ]
+"31
+[; ;U2_main.c: 31:     }
+}
+[e :U 287 ]
+[e $U 288  ]
+[e :U 289 ]
+"33
+[; ;U2_main.c: 33: }
 [e :UE 283 ]
 }
 [p f _sprintf 8421508 ]

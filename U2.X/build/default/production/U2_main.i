@@ -4634,6 +4634,7 @@ unsigned char __t3rd16on(void);
 void uart_init(void);
 void uart_write_char(char data);
 void tx_str(const char *str);
+unsigned char uart_read_char();
 # 2 "U2_main.c" 2
 
 # 1 "./i2c.h" 1
@@ -4820,18 +4821,30 @@ char *tempnam(const char *, const char *);
 # 5 "U2_main.c" 2
 
 
+
+
 void main(void)
 {
-    char buffer[12];
+
     unsigned char h, m, s;
+    char buffer[12];
+
+    TRISCbits.RC2=1;
+
     uart_init();
     i2c_init();
+    TRISC0=0;
+    TRISC1=0;
+    LATC0=1;
+
+    while (!PORTCbits.RC2);
+    LATC1=1;
     while (1)
     {
         rtc_get_time(&h, &m, &s);
-
         sprintf(buffer, "%02d:%02d:%02d\n", h, m, s);
-
         tx_str(buffer);
+        _delay((unsigned long)((1000)*(12000000/4000.0)));
     }
+
 }

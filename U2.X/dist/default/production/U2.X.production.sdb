@@ -71,7 +71,7 @@
 [v _bcd_to_dec bcd_to_dec `(uc  1 e 1 0 ]
 "28
 [v _rtc_get_time rtc_get_time `(v  1 e 1 0 ]
-"7 D:\PIC MCU\Door Lock System\U2.X\U2_main.c
+"9 D:\PIC MCU\Door Lock System\U2.X\U2_main.c
 [v _main main `(v  1 e 1 0 ]
 "7 D:\PIC MCU\Door Lock System\U2.X\U2_uart.c
 [v _uart_init uart_init `(v  1 e 1 0 ]
@@ -79,7 +79,7 @@
 [v _tx_str tx_str `(v  1 e 1 0 ]
 "27
 [v _uart_write_char uart_write_char `(v  1 e 1 0 ]
-[s S123 . 1 `uc 1 RC0 1 0 :1:0 
+[s S33 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 RC3 1 0 :1:3 
@@ -89,7 +89,7 @@
 `uc 1 RC7 1 0 :1:7 
 ]
 "497 C:/Program Files/Microchip/MPLABX/v6.20/packs/Microchip/PIC18Fxxxx_DFP/1.6.159/xc8\pic\include\proc\pic18f4520.h
-[s S132 . 1 `uc 1 T1OSO 1 0 :1:0 
+[s S84 . 1 `uc 1 T1OSO 1 0 :1:0 
 `uc 1 T1OSI 1 0 :1:1 
 `uc 1 CCP1 1 0 :1:2 
 `uc 1 SCK 1 0 :1:3 
@@ -98,7 +98,7 @@
 `uc 1 TX 1 0 :1:6 
 `uc 1 RX 1 0 :1:7 
 ]
-[s S141 . 1 `uc 1 T13CKI 1 0 :1:0 
+[s S93 . 1 `uc 1 T13CKI 1 0 :1:0 
 `uc 1 CCP2 1 0 :1:1 
 `uc 1 . 1 0 :1:2 
 `uc 1 SCL 1 0 :1:3 
@@ -107,18 +107,32 @@
 `uc 1 CK 1 0 :1:6 
 `uc 1 DT 1 0 :1:7 
 ]
-[s S150 . 1 `uc 1 T1CKI 1 0 :1:0 
+[s S102 . 1 `uc 1 T1CKI 1 0 :1:0 
 `uc 1 . 1 0 :1:1 
 `uc 1 P1A 1 0 :1:2 
 ]
-[s S154 . 1 `uc 1 . 1 0 :1:0 
+[s S106 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 PA2 1 0 :1:1 
 `uc 1 PA1 1 0 :1:2 
 ]
-[u S158 . 1 `S123 1 . 1 0 `S132 1 . 1 0 `S141 1 . 1 0 `S150 1 . 1 0 `S154 1 . 1 0 ]
-[v _PORTCbits PORTCbits `VES158  1 e 1 @3970 ]
+[u S110 . 1 `S33 1 . 1 0 `S84 1 . 1 0 `S93 1 . 1 0 `S102 1 . 1 0 `S106 1 . 1 0 ]
+[v _PORTCbits PORTCbits `VES110  1 e 1 @3970 ]
+[s S24 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"1953
+[u S42 . 1 `S24 1 . 1 0 `S33 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES42  1 e 1 @3988 ]
 "3576
 [v _TXREG TXREG `VEuc  1 e 1 @4013 ]
+"3588
+[v _RCREG RCREG `VEuc  1 e 1 @4014 ]
 "3600
 [v _SPBRG SPBRG `VEuc  1 e 1 @4015 ]
 "4915
@@ -141,10 +155,20 @@
 [v _BF BF `VEb  1 e 0 @32312 ]
 "7145
 [v _BRGH BRGH `VEb  1 e 0 @32098 ]
+"7295
+[v _CREN CREN `VEb  1 e 0 @32092 ]
+"7652
+[v _LATC0 LATC0 `VEb  1 e 0 @31832 ]
+"7655
+[v _LATC1 LATC1 `VEb  1 e 0 @31833 ]
+"7892
+[v _OERR OERR `VEb  1 e 0 @32089 ]
 "7997
 [v _PEN PEN `VEb  1 e 0 @32298 ]
 "8171
 [v _RCEN RCEN `VEb  1 e 0 @32299 ]
+"8180
+[v _RCIF RCIF `VEb  1 e 0 @31989 ]
 "8240
 [v _RSEN RSEN `VEb  1 e 0 @32297 ]
 "8297
@@ -155,6 +179,12 @@
 [v _SSPIF SSPIF `VEb  1 e 0 @31987 ]
 "8393
 [v _SYNC SYNC `VEb  1 e 0 @32100 ]
+"8615
+[v _TRISC0 TRISC0 `VEb  1 e 0 @31904 ]
+"8618
+[v _TRISC1 TRISC1 `VEb  1 e 0 @31905 ]
+"8633
+[v _TRISC6 TRISC6 `VEb  1 e 0 @31910 ]
 "8672
 [v _TRMT TRMT `VEb  1 e 0 @32097 ]
 "8726
@@ -166,16 +196,16 @@
 [v _flags flags `uc  1 s 1 flags ]
 "185
 [v _dbuf dbuf `[32]uc  1 s 32 dbuf ]
-"7 D:\PIC MCU\Door Lock System\U2.X\U2_main.c
+"9 D:\PIC MCU\Door Lock System\U2.X\U2_main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"9
-[v main@buffer buffer `[12]uc  1 a 12 64 ]
-"10
-[v main@s s `uc  1 a 1 78 ]
-[v main@m m `uc  1 a 1 77 ]
-[v main@h h `uc  1 a 1 76 ]
-"21
+"13
+[v main@buffer buffer `[12]uc  1 a 12 66 ]
+"12
+[v main@s s `uc  1 a 1 80 ]
+[v main@m m `uc  1 a 1 79 ]
+[v main@h h `uc  1 a 1 78 ]
+"33
 } 0
 "7 D:\PIC MCU\Door Lock System\U2.X\U2_uart.c
 [v _uart_init uart_init `(v  1 e 1 0 ]
@@ -199,10 +229,10 @@
 "9 C:\Program Files\Microchip\xc8\v2.50\pic\sources\c99\common\nf_sprintf.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
 {
-[u S679 . 2 `*.30uc 1 buffer 1 0 `*.39Cuc 1 source 2 0 ]
+[u S781 . 2 `*.30uc 1 buffer 1 0 `*.39Cuc 1 source 2 0 ]
 "13
-[s S682 _IO_FILE 11 `S679 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
-[v sprintf@f f `S682  1 a 11 53 ]
+[s S784 _IO_FILE 11 `S781 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
+[v sprintf@f f `S784  1 a 11 53 ]
 "12
 [v sprintf@ap ap `[1]*.30v  1 a 1 52 ]
 "9
@@ -215,9 +245,9 @@
 {
 "1820
 [v vfprintf@cfmt cfmt `*.31uc  1 a 1 43 ]
-[s S714 _IO_FILE 0 ]
+[s S816 _IO_FILE 0 ]
 "1817
-[v vfprintf@fp fp `*.30S714  1 p 1 40 ]
+[v vfprintf@fp fp `*.30S816  1 p 1 40 ]
 [v vfprintf@fmt fmt `*.31Cuc  1 p 1 41 ]
 [v vfprintf@ap ap `*.30*.30v  1 p 1 42 ]
 "1840
@@ -225,16 +255,16 @@
 "1177
 [v _vfpfcnvrt vfpfcnvrt `(v  1 s 1 vfpfcnvrt ]
 {
-[u S738 . 4 `i 1 sint 2 0 `ui 1 uint 2 0 `d 1 f 4 0 ]
+[u S840 . 4 `i 1 sint 2 0 `ui 1 uint 2 0 `d 1 f 4 0 ]
 "1188
-[v vfpfcnvrt@convarg convarg `S738  1 a 4 34 ]
+[v vfpfcnvrt@convarg convarg `S840  1 a 4 34 ]
 "1179
 [v vfpfcnvrt@cp cp `*.31uc  1 a 1 39 ]
 "1180
 [v vfpfcnvrt@done done `a  1 a 1 38 ]
-[s S714 _IO_FILE 0 ]
+[s S816 _IO_FILE 0 ]
 "1177
-[v vfpfcnvrt@fp fp `*.30S714  1 p 1 31 ]
+[v vfpfcnvrt@fp fp `*.30S816  1 p 1 31 ]
 [v vfpfcnvrt@fmt fmt `*.30*.31uc  1 p 1 32 ]
 [v vfpfcnvrt@ap ap `*.30*.30v  1 p 1 33 ]
 "1814
@@ -261,9 +291,9 @@
 [v dtoa@s s `uc  1 a 1 28 ]
 "520
 [v dtoa@p p `a  1 a 1 25 ]
-[s S714 _IO_FILE 0 ]
+[s S816 _IO_FILE 0 ]
 "513
-[v dtoa@fp fp `*.30S714  1 p 1 20 ]
+[v dtoa@fp fp `*.30S816  1 p 1 20 ]
 [v dtoa@d d `i  1 p 2 21 ]
 "583
 } 0
@@ -272,9 +302,9 @@
 {
 "195
 [v pad@i i `i  1 a 2 18 ]
-[s S714 _IO_FILE 0 ]
+[s S816 _IO_FILE 0 ]
 "193
-[v pad@fp fp `*.30S714  1 p 1 13 ]
+[v pad@fp fp `*.30S816  1 p 1 13 ]
 [v pad@buf buf `*.30uc  1 p 1 14 ]
 [v pad@p p `i  1 p 2 15 ]
 "226
@@ -288,18 +318,18 @@
 [v fputs@c c `uc  1 a 1 10 ]
 "8
 [v fputs@s s `*.30Cuc  1 p 1 8 ]
-[u S679 . 2 `*.30uc 1 buffer 1 0 `*.39Cuc 1 source 2 0 ]
-[s S682 _IO_FILE 11 `S679 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
-[v fputs@fp fp `*.30S682  1 p 1 9 ]
+[u S781 . 2 `*.30uc 1 buffer 1 0 `*.39Cuc 1 source 2 0 ]
+[s S784 _IO_FILE 11 `S781 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
+[v fputs@fp fp `*.30S784  1 p 1 9 ]
 "19
 } 0
 "8 C:\Program Files\Microchip\xc8\v2.50\pic\sources\c99\common\nf_fputc.c
 [v _fputc fputc `(i  1 e 2 0 ]
 {
 [v fputc@c c `i  1 p 2 0 ]
-[u S679 . 2 `*.30uc 1 buffer 1 0 `*.39Cuc 1 source 2 0 ]
-[s S682 _IO_FILE 11 `S679 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
-[v fputc@fp fp `*.30S682  1 p 1 2 ]
+[u S781 . 2 `*.30uc 1 buffer 1 0 `*.39Cuc 1 source 2 0 ]
+[s S784 _IO_FILE 11 `S781 1 . 2 0 `i 1 count 2 2 `[3]uc 1 ungetbuf 3 4 `i 1 ungetcnt 2 7 `i 1 limit 2 9 ]
+[v fputc@fp fp `*.30S784  1 p 1 2 ]
 "24
 } 0
 "7 C:\Program Files\Microchip\xc8\v2.50\pic\sources\c99\common\putch.c

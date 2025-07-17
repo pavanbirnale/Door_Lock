@@ -4637,11 +4637,12 @@ unsigned char __t3rd16on(void);
 void uart_init(void);
 void uart_write_char(char data);
 void tx_str(const char *str);
+unsigned char uart_read_char();
 # 5 "U2_uart.c" 2
 
 
 void uart_init(void) {
-
+    TRISC6 = 0;
     SPBRG = 77;
     BRGH = 1;
     SYNC = 0;
@@ -4665,4 +4666,16 @@ void uart_write_char(char data)
     while(!TRMT);
     TXREG=data;
     _delay((unsigned long)((1)*(12000000/4000.0)));
+}
+
+unsigned char uart_read_char(void)
+{
+    if (OERR)
+    {
+        CREN = 0;
+        CREN = 1;
+    }
+    while (!RCIF)
+        ;
+    return RCREG;
 }
